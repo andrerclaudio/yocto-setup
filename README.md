@@ -1,7 +1,7 @@
-# yocto-setup
+# yocto-digest
 
-`yocto-setup` is a ***work-in-progress*** project, intended to provide support
-to some specifics boards (BSP) and recipes to take advantage of them.
+`yocto-digest` is a ***work-in-progress*** project, intended to provide support
+for some specifics boards (BSP) and recipes to take advantage of them.
 
 
 ## What's inside?
@@ -9,7 +9,8 @@ to some specifics boards (BSP) and recipes to take advantage of them.
 This repository is composed of:
 
  * `.config.yaml`: a kas configuration file
- * `meta-nxp`: the layer with the metadata for NXP boards
+ * `meta-nxp`: layer with the metadata for NXP boards
+ * `meta-tools`: layer with non-board related sripts to improve the hardware experience 
 
 The `.config.yaml` is the configuration file for the kas utility, which
 allows to easily download all the required third-party components in the
@@ -23,6 +24,8 @@ and enables:
    `meta-arm-toolchain` layers
  * the `meta-nxp` layer, not downloaded as it is already part of this
    repository, but enabled in `build/conf/bblayers.conf`
+ * the `meta-tools` layer, not downloaded as it is already part of this
+   repository, but enabled in `build/conf/bblayers.conf`
 
 
  ### The `meta-nxp` layer
@@ -30,4 +33,7 @@ and enables:
 `meta-nxp` is a layer that demonstrates how a realistic layer for a
 product company can (and, in our opinion, should) look like.
 
+ ### The `meta-tools` layer
 
+`meta-tools` is a layer that demonstrates how a realistic layer for a
+product company can (and, in our opinion, should) look like.
