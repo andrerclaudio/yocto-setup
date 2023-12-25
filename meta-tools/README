@@ -1,4 +1,4 @@
-This README file contains information on the contents of the meta-nxp layer.
+This README file contains information on the contents of the meta-tools layer.
 
 Please see the corresponding sections below for details.
 
@@ -8,32 +8,27 @@ Dependencies
   URI: https://git.openembedded.org/openembedded-core
   branch: mickledore
 
-  URI: git://git.yoctoproject.org/meta-arm
-  branch: mickledore
+  ...
 
 Patches
 =======
 
-Please submit any patches against the meta-kiss layer as patches to
-feedback@bootlin.com or as github pull requests at
-https://github.com/bootlin/simplest-yocto-setup
+Please submit any patches against the meta-tools layer github pull requests at
+https://github.com/andrerclaudio/yocto-digest
 
 Table of Contents
 =================
 
-  I. Adding the meta-kiss layer to your build
+  I. Adding the meta-tools layer to your build
  II. Misc
 
 
-I. Adding the meta-kiss layer to your build
+I. Adding the meta-tools layer to your build
 =================================================
 
-Run 'bitbake-layers add-layer meta-kiss'
+Run 'bitbake-layers add-layer meta-tools'
 
 II. Misc
 ========
 
-This layer provides an example of the simplest, but realistic and working,
-Yocto/OpenEmbedded setup for end products. It is not useful as is, but
-rather as a reference on how a layer can be written without unnecessary
-complications.
+This layer provides ...

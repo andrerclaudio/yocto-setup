@@ -30,6 +30,10 @@ repos:
     layers:
       meta-nxp:
 
+  meta-tools:
+    layers:
+      meta-tools:
+
 local_conf_header:
   meta-nxp: |
     # Some useful lines you may want to copy to your site.conf for development
