@@ -1,7 +1,7 @@
 header:
   version: 15
 
-machine: imx8mnevk
+machine: iMX8MNano-evk
 distro: nxp-custom
 target:
   - nxp-custom-image
@@ -9,7 +9,7 @@ target:
 repos:
   bitbake:
     url: "https://git.openembedded.org/bitbake"
-    branch: mickledore
+    branch: "2.0"
     layers:
       .: excluded
 
@@ -18,6 +18,13 @@ repos:
     branch: mickledore
     layers:
       meta:
+
+  meta-openembedded:
+    url: "https://github.com/openembedded/meta-openembedded"
+    branch: mickledore
+    layers: 
+      meta-oe:
+      meta-python:
 
   meta-arm:
     url: "git://git.yoctoproject.org/meta-arm"
