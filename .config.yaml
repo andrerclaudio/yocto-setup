@@ -1,7 +1,7 @@
 header:
   version: 15
 
-machine: iMX8MNano-evk
+machine: imx8mn-lpddr4-evk
 distro: nxp-custom
 target:
   - nxp-custom-image
@@ -26,12 +26,12 @@ repos:
       meta-oe:
       meta-python:
 
-  meta-arm:
-    url: "git://git.yoctoproject.org/meta-arm"
-    branch: mickledore
+  meta-imx:
+    url: "https://github.com/nxp-imx/meta-imx"
+    branch: mickledore-6.1.22-2.0.0
     layers:
-      meta-arm-toolchain:
-      meta-arm:
+      meta-bsp:
+      meta-sdk:
 
   meta-nxp:
     layers:
@@ -45,4 +45,4 @@ local_conf_header:
   meta-nxp: |
     # Some useful lines you may want to copy to your site.conf for development
     # INHERIT += "rm_work"
-    # EXTRA_IMAGE_FEATURES = "debug-tweaks"
+    # EXTRA_IMAGE_FEATURES = "debug-tweaks dev-pkgs"

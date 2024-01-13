@@ -31,4 +31,4 @@ Run 'bitbake-layers add-layer meta-tools'
 II. Misc
 ========
 
-This layer provides ...
+This layer provides some useful tools to make the designed board experience even better.

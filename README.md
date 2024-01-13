@@ -21,8 +21,8 @@ and enables:
  * the `openembedded-core` repository which contains the `meta` layer with all the "core" recipes.
  * the `meta-openembedded` repository which is a collection of layers to suppliment OE-Core with additional packages.<br>
    Note that ***meta-oe*** and ***meta-python*** are enabled in `build/conf/bblayers.conf`.
- * the `meta-arm` repository which contains the `meta-arm` and
-   `meta-arm-toolchain` layers.
+ * the `meta-imx` repository which contains the `meta-bsp` and
+   `meta-sdk` layers.
  * the `meta-nxp` layer, not downloaded as it is already part of this
    repository, but enabled in `build/conf/bblayers.conf`.<br>
    Please, refer to ***meta-nxp/README*** file to see more details about this layer and its goal.

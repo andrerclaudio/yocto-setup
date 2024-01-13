@@ -2,4 +2,4 @@ bitbake/
 openembedded-core/
 meta-openembedded/
 build/
-meta-arm/
+meta-imx/
