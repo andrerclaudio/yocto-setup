@@ -26,6 +26,13 @@ repos:
       meta-oe:
       meta-python:
 
+  meta-arm:
+    url: "git://git.yoctoproject.org/meta-arm"
+    branch: mickledore
+    layers:
+      meta-arm-toolchain:
+      meta-arm:
+
   meta-imx:
     url: "https://github.com/nxp-imx/meta-imx"
     branch: mickledore-6.1.22-2.0.0

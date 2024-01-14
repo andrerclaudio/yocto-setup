@@ -1,5 +1,6 @@
 bitbake/
+build/
+meta-arm/
+meta-imx/
 openembedded-core/
 meta-openembedded/
-build/
-meta-imx/
