@@ -5,7 +5,7 @@ Please see the corresponding sections below for details.
 Dependencies
 ============
 
-  URI: https://git.openembedded.org/openembedded-core
+  URI: 
   branch: mickledore
 
   ...
@@ -32,3 +32,4 @@ II. Misc
 ========
 
 This layer provides some useful tools to make the designed board experience even better.
+To get to know what is what, inside each script folder there is a README file explaing it self and what it does, etc.

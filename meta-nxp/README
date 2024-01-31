@@ -8,6 +8,9 @@ Dependencies
   URI: https://git.openembedded.org/openembedded-core
   branch: mickledore
 
+  URI: git://git.yoctoproject.org/meta-arm
+  branch: mickledore
+
   URI: https://github.com/nxp-imx/meta-imx
   branch: mickledore-6.1.22-2.0.0
 
@@ -35,3 +38,5 @@ II. Misc
 ========
 
 This layer provides the base files to bring up the NXP boards to life.   
+Supported machines, Distros and Images are placed and its related folders and are quite explanatory, please,
+refer to them in order to check what is available to use in NXP board context.
