@@ -9,33 +9,40 @@ target:
 repos:
   bitbake:
     url: "https://git.openembedded.org/bitbake"
-    branch: "2.0"
+    branch: "2.6"
     layers:
       .: excluded
 
   openembedded-core:
     url: "https://git.openembedded.org/openembedded-core"
-    branch: mickledore
+    branch: kirkstone
     layers:
       meta:
 
   meta-openembedded:
     url: "https://github.com/openembedded/meta-openembedded"
-    branch: mickledore
+    branch: kirkstone
     layers: 
       meta-oe:
       meta-python:
 
   meta-arm:
     url: "git://git.yoctoproject.org/meta-arm"
-    branch: mickledore
+    branch: kirkstone
     layers:
       meta-arm-toolchain:
       meta-arm:
 
   meta-imx:
     url: "https://github.com/nxp-imx/meta-imx"
-    branch: mickledore-6.1.22-2.0.0
+    branch: kirkstone-5.15.32-2.0.0
+    layers:
+      meta-bsp:
+      meta-sdk:
+
+  meta-freescale:
+    url: "https://github.com/Freescale/meta-freescale"
+    branch: kirkstone
     layers:
       meta-bsp:
       meta-sdk:
