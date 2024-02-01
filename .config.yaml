@@ -43,9 +43,8 @@ repos:
   meta-freescale:
     url: "https://github.com/Freescale/meta-freescale"
     branch: kirkstone
-    layers:
-      meta-bsp:
-      meta-sdk:
+    # layers:
+      # Adding the meta-freescale layer itself
 
   meta-nxp:
     layers:

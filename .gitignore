@@ -2,5 +2,6 @@ bitbake/
 build/
 meta-arm/
 meta-imx/
+meta-freescale/
 openembedded-core/
 meta-openembedded/
