@@ -9,7 +9,7 @@ target:
 repos:
   bitbake:
     url: "https://git.openembedded.org/bitbake"
-    branch: "2.6"
+    branch: "2.0"
     layers:
       .: excluded
 
@@ -46,16 +46,16 @@ repos:
     # layers:
       # Adding the meta-freescale layer itself
 
-  meta-nxp:
+  meta-boards-nxp:
     layers:
-      meta-nxp:
+      meta-boards-nxp:
 
   meta-tools:
     layers:
       meta-tools:
 
 local_conf_header:
-  meta-nxp: |
+  meta-boards-nxp: |
     # Some useful lines you may want to copy to your site.conf for development
     # INHERIT += "rm_work"
     # EXTRA_IMAGE_FEATURES = "debug-tweaks dev-pkgs"
