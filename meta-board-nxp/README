@@ -25,14 +25,14 @@ https://github.com/andrerclaudio/yocto-digest
 Table of Contents
 =================
 
-  I. Adding the meta-boards-nxp layer to your build
+  I. Adding the meta-board-nxp layer to your build
  II. Misc
 
 
-I. Adding the meta-boards-nxp layer to your build
+I. Adding the meta-board-nxp layer to your build
 =================================================
 
-Run 'bitbake-layers add-layer meta-boards-nxp'
+Run 'bitbake-layers add-layer meta-board-nxp'
 
 II. Misc
 ========

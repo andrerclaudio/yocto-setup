@@ -9,7 +9,7 @@ for some specifics boards (BSP files) and recipes to take advantage of those boa
 This repository is composed of:
 
  * `.config.yaml`: a kas configuration file.
- * `meta-boards-nxp`: layer with the metadata for NXP boards.
+ * `meta-board-nxp`: layer with the metadata for NXP boards.
  * `meta-tools`: layer with non-board related scripts to improve the hardware experience.
 
 The `.config.yaml` is the configuration file for the kas utility, which
@@ -24,9 +24,9 @@ and enables:
  * the `meta-arm` repository which contains the `meta-arm` and `meta-arm-toolchain` layers.
  * the `meta-imx` repository which contains the `meta-bsp` and
    `meta-sdk` layers.
- * the `meta-boards-nxp` layer, not downloaded as it is already part of this
+ * the `meta-board-nxp` layer, not downloaded as it is already part of this
    repository, but enabled in `build/conf/bblayers.conf`.<br>
-   Please, refer to ***meta-boards-nxp/README*** file to see more details about this layer and its goals.
+   Please, refer to ***meta-board-nxp/README*** file to see more details about this layer and its goals.
  * the `meta-tools` layer, not downloaded as it is already part of this
    repository, but enabled in `build/conf/bblayers.conf`.<br>
    Please, refer to ***meta-tools/README*** file to see more details about this layer and its goals.

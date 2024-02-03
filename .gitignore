@@ -3,5 +3,7 @@ build/
 meta-arm/
 meta-imx/
 meta-freescale/
+meta-freescale-3rdparty/
+meta-freescale-distro/
 openembedded-core/
 meta-openembedded/

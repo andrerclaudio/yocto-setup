@@ -23,8 +23,3 @@ IMAGE_INSTALL += " \
 "
 
 IMAGE_LINGUAS = " "
-
-# Set machine Hostname
-hostname:pn-base-files = "iMX8mn-evk"
-
-export IMAGE_BASENAME = "custom-imx8mn-base"
