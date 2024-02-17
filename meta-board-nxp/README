@@ -1,0 +1,42 @@
+This README file contains information on the contents of the meta-nxp layer.
+
+Please see the corresponding sections below for details.
+
+Dependencies
+============
+
+  URI: https://git.openembedded.org/openembedded-core
+  branch: mickledore
+
+  URI: git://git.yoctoproject.org/meta-arm
+  branch: mickledore
+
+  URI: https://github.com/nxp-imx/meta-imx
+  branch: mickledore-6.1.22-2.0.0
+
+  ...
+
+Patches
+=======
+
+Please, submit any patches against the meta-nxp layer github pull requests at
+https://github.com/andrerclaudio/yocto-digest
+
+Table of Contents
+=================
+
+  I. Adding the meta-board-nxp layer to your build
+ II. Misc
+
+
+I. Adding the meta-board-nxp layer to your build
+=================================================
+
+Run 'bitbake-layers add-layer meta-board-nxp'
+
+II. Misc
+========
+
+This layer provides the base files to bring up the NXP boards to life.   
+Supported machines, Distros and Images are placed and its related folders and are quite explanatory, please,
+refer to them in order to check what is available to use in NXP board context.

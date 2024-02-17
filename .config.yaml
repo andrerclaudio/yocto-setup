@@ -1,7 +1,7 @@
 header:
   version: 15
 
-machine: imx8mnevk
+machine: imx8mn-lpddr4-evk
 distro: nxp-custom
 target:
   - nxp-custom-image
@@ -9,29 +9,73 @@ target:
 repos:
   bitbake:
     url: "https://git.openembedded.org/bitbake"
-    branch: mickledore
+    branch: "2.0"
     layers:
       .: excluded
 
   openembedded-core:
     url: "https://git.openembedded.org/openembedded-core"
-    branch: mickledore
+    branch: kirkstone
     layers:
       meta:
 
-  meta-arm:
-    url: "git://git.yoctoproject.org/meta-arm"
-    branch: mickledore
-    layers:
-      meta-arm-toolchain:
-      meta-arm:
+  meta-openembedded:
+    url: "https://github.com/openembedded/meta-openembedded"
+    branch: kirkstone
+    layers: 
+      meta-oe:
+      meta-python:
+      meta-multimedia:
+      meta-networking:
 
-  meta-nxp:
+  meta-imx:
+    url: "https://github.com/nxp-imx/meta-imx"
+    branch: kirkstone-5.15.71-2.2.0
     layers:
-      meta-nxp:
+      meta-bsp:
+      meta-sdk:
+
+  meta-freescale:
+    url: "https://github.com/Freescale/meta-freescale"
+    branch: kirkstone
+    # layers:
+      # Adding the meta-freescale layer itself
+
+  meta-freescale-distro:
+    url: "https://github.com/Freescale/meta-freescale-distro"
+    branch: kirkstone
+    # layers:
+      # Adding the meta-freescale-distro layer itself
+
+  meta-freescale-3rdparty:
+    url: "https://github.com/Freescale/meta-freescale-3rdparty"
+    branch: kirkstone
+    # layers:
+      # Adding the meta-freescale-3rdparty layer itself
+
+  meta-board-nxp:
+    layers:
+      meta-board-nxp:
+
+  meta-tools:
+    layers:
+      meta-tools:
 
 local_conf_header:
-  meta-nxp: |
+  meta-board-nxp: |
+    # Uncoment the lines below in local.conf
+    # 
+    # ACCEPT_FSL_EULA = "1"
+    #
+    # ---------------------- 
     # Some useful lines you may want to copy to your site.conf for development
+    # EXTRA_IMAGE_FEATURES = "debug-tweaks dev-pkgs"
+    # Switch to Debian packaging and include package-management in the image
+    # PACKAGE_CLASSES = "package_deb"
+    # EXTRA_IMAGE_FEATURES += "package-management"
+    # Remove the old image before the new one generated to save disk space
+    # RM_OLD_IMAGE = "1"
+    # Clean up working directory after build
     # INHERIT += "rm_work"
-    # EXTRA_IMAGE_FEATURES = "debug-tweaks"
+    #
+    # ----------------------
