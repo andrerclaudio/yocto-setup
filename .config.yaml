@@ -57,10 +57,6 @@ repos:
     layers:
       meta-board-nxp:
 
-  meta-tools:
-    layers:
-      meta-tools:
-
 local_conf_header:
   meta-board-nxp: |
     # Uncoment the lines below in local.conf
