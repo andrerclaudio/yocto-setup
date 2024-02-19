@@ -10,7 +10,7 @@ This repository is composed of:
 
  * `.config.yaml`: a kas configuration file.
  * `meta-board-nxp`: layer with the metadata for NXP boards.
- * `meta-tools`: layer with non-board related scripts to improve the hardware experience.
+ * `tools`: folder with non-board related scripts to improve the hardware experience.
 
 The `.config.yaml` is the configuration file for the kas utility, which
 allows to easily download all the required third-party components in the
@@ -27,9 +27,8 @@ and enables:
  * the `meta-board-nxp` layer, not downloaded as it is already part of this
    repository, but enabled in `build/conf/bblayers.conf`.<br>
    Please, refer to ***meta-board-nxp/README*** file to see more details about this layer and its goals.
- * the `meta-tools` layer, not downloaded as it is already part of this
-   repository, but enabled in `build/conf/bblayers.conf`.<br>
-   Please, refer to ***meta-tools/README*** file to see more details about this layer and its goals.
+ * the `tools` folder, not downloaded as it is already part of this repository.<br>
+   Please, refer to ***tools/README*** file to see more details about this folder and its goals.
 
 Using kas is not mandatory to use Yocto/OpenEmbedded, but i found it
 simple and convenient. You can use another tool for your project if so you
