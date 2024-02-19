@@ -9,7 +9,7 @@ target:
 repos:
   poky:
     url: "https://github.com/yoctoproject/poky.git"
-    branch: mickledore
+    branch: kirkstone
     layers:
       meta:
       meta-poky:
@@ -17,7 +17,7 @@ repos:
 
   meta-openembedded:
     url: "https://github.com/openembedded/meta-openembedded"
-    branch: mickledore
+    branch: kirkstone
     layers: 
       meta-oe:
       meta-python:
@@ -26,26 +26,26 @@ repos:
 
   meta-imx:
     url: "https://github.com/nxp-imx/meta-imx"
-    branch: mickledore-6.1.55-2.2.0
+    branch: kirkstone-5.15.71-2.2.2
     layers:
       meta-bsp:
       meta-sdk:
 
   meta-freescale:
     url: "https://github.com/Freescale/meta-freescale"
-    branch: master
+    branch: kirkstone
     # layers:
       # Adding the meta-freescale layer itself
 
   meta-freescale-distro:
     url: "https://github.com/Freescale/meta-freescale-distro"
-    branch: master
+    branch: kirkstone
     # layers:
       # Adding the meta-freescale-distro layer itself
 
   meta-freescale-3rdparty:
     url: "https://github.com/Freescale/meta-freescale-3rdparty"
-    branch: master
+    branch: kirkstone
     # layers:
       # Adding the meta-freescale-3rdparty layer itself
 
