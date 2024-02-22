@@ -21,7 +21,6 @@ IMAGE_INSTALL += " \
     firmwared \
     packagegroup-imx-core-tools \
     packagegroup-imx-security \
-    spidev-ili9341 \
 "
 
 IMAGE_LINGUAS = " "
