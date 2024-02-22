@@ -11,31 +11,17 @@ inherit core-image
 
 IMAGE_FEATURES += " \
     debug-tweaks \
-    dev-pkgs \
     splash \
     ssh-server-openssh \
     hwcodecs \
     tools-profile \
-    tools-sdk \
-    tools-debug \
-    hwcodecs \
 "
 
 IMAGE_INSTALL += " \
     firmwared \
     packagegroup-imx-core-tools \
     packagegroup-imx-security \
-    libgpiod \
-    python3 \
-    python3-pip \
-    python3-modules \
-    python3-misc \
-    python3-spidev \
-    spitools \
-    spidev-test \
-    python3-numpy \
-    python3-pillow \
-    python3-gpiod\
+    spidev-ili9341 \
 "
 
 IMAGE_LINGUAS = " "

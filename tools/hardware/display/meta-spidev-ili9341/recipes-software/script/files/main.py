@@ -9,13 +9,10 @@ It loads and displays an image on the TFT display.
 
 Requirements:
 - Python 3
-- Pillow (PIL) library
-- SpiDev_ILI9341 library
-- gpiod library
-- spidev library
+- Pillow (PIL)
+- gpiod
+- spidev
 
-Make sure to install the required libraries using:
-pip install Pillow spidev gpiod SpiDev_ILI9341
 """
 from PIL import Image
 import SpiDev_ILI9341 as TFT
@@ -23,10 +20,10 @@ import gpiod
 from gpiod.line_settings import Direction, Value
 import spidev
 import logging
-import time
+import sys 
 
 # Create a logger
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s [%(levelname)s]: %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s]: %(message)s")
 
 # iMX8mn configuration.
 DC = 9
@@ -37,7 +34,7 @@ SPI_PORT = 1
 SPI_DEVICE = 0
 
 
-def application():
+def application(path):
     """
     Initialize and control the TFT display, load and display an image.
     """
@@ -95,8 +92,8 @@ def application():
         disp.clear((255, 0, 0))
 
         # Load an image.
-        logging.info('Loading image...')
-        image = Image.open('/home/root/display/wave.jpg')
+        logging.info(f'Loading image: {path}')
+        image = Image.open(path)
 
         # Resize the image and rotate it so it's 240x320 pixels.
         image = image.rotate(90).resize((240, 320))
@@ -109,9 +106,11 @@ def application():
             pass
 
     except Exception as e:
-        logging.debug(e, exc_info=False)
+        logging.exception(e, exc_info=False)
     except KeyboardInterrupt:
-        logging.debug("User has stopped the program execution!", exc_info=False)
+        logging.exception("User has stopped the program execution!", exc_info=False)
+    except gpiod.exception as e:
+        logging.exception(e, exc_info=False)
 
     finally:
         logging.info('Closing and Cleaning ...')
@@ -131,5 +130,11 @@ def application():
 
 
 if __name__ == "__main__":
+
+    if len(sys.argv) != 2:
+        logging.error("Usage: python3 main.py <image_path>")
+        sys.exit(1)
+
+    image_path = sys.argv[1]
     # Run the script
-    application()
+    application(image_path)

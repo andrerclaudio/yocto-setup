@@ -4,7 +4,7 @@ header:
 machine: imx8mn-lpddr4-evk
 distro: nxp-custom
 target:
-  - nxp-custom-image
+  - nxp-custom-image-core
 
 repos:
   poky:

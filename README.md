@@ -52,13 +52,15 @@ kas checkout
 . openembedded-core/oe-init-build-env
 
 # Run your first build
-bitbake nxp-custom-image
+bitbake nxp-custom-image-core
 
+#
 # Have dinner
+#
 
 # Find the output images here
 ls -l tmp-glibc/deploy/images/imx8mn-lpddr4-evk/
 
 # Flash the image (use your uSD card device instead of XYZ!):
-sudo bmaptool copy tmp-glibc/deploy/images/imx8mn-lpddr4-evk/nxp-custom-image-imx8mn-lpddr4-evk.wic /dev/XYZ
+sudo bmaptool copy tmp-glibc/deploy/images/imx8mn-lpddr4-evk/nxp-custom-image-core-imx8mn-lpddr4-evk.wic /dev/XYZ
 ```
