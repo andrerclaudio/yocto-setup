@@ -55,7 +55,7 @@ repos:
 
 bblayers_conf_header:
   standard: |
-    BBFILES ?= ""
+    # Add custom settings
 
 local_conf_header:
   standard: |
