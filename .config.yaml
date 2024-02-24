@@ -1,7 +1,7 @@
 header:
   version: 15
 
-machine: imx8mn-lpddr4-evk
+machine: nxp-imx8mn
 distro: nxp-custom
 target:
   - nxp-custom-image-core
