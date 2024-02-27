@@ -37,12 +37,6 @@ repos:
     # layers:
       # Adding the meta-freescale layer itself
 
-  meta-freescale-distro:
-    url: "https://github.com/Freescale/meta-freescale-distro"
-    branch: kirkstone
-    # layers:
-      # Adding the meta-freescale-distro layer itself
-
   meta-board-nxp:
     layers:
       meta-board-nxp:
