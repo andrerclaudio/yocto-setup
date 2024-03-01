@@ -59,18 +59,6 @@ SOC_ATF_BOOT_UART_BASE                    = ""
 SOC_ATF_BOOT_UART_BASE:mx8m-generic-bsp   = "0x30890000"
 ATF_BOOT_UART_BASE                       ?= "${SOC_ATF_BOOT_UART_BASE}"
 
-PREFERRED_PROVIDER_virtual/xserver      = "xserver-xorg"
-XSERVER_DRIVER                          = "xf86-video-fbdev"
-XSERVER_DRIVER:append:mx8-generic-bsp   = " xf86-video-modesetting"
-XSERVER_DRIVER:imx-mainline-bsp = " \
-    xf86-video-fbdev \
-    xf86-video-modesetting \
-    xserver-xorg-extension-glx \
-"
-XSERVER = "xserver-xorg \
-           xf86-input-evdev \
-           ${XSERVER_DRIVER}"
-
 # Ship kernel modules
 MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
 
@@ -91,19 +79,8 @@ MACHINEOVERRIDES_FILTERED_OUT_QA_ERROR = "%s overrides cannot be used and need c
 MACHINE_SOCARCH_SUFFIX ?= ""
 MACHINE_SOCARCH_SUFFIX:mx8mn-nxp-bsp   = "-mx8mn"
 
-# For Mainline we use a single SoC suffix as we don't have different build options
-MACHINE_SOCARCH_SUFFIX:imx-mainline-bsp = "-imx"
-
 MACHINE_ARCH_FILTER = "virtual/kernel"
 INHERIT += "fsl-dynamic-packagearch"
-
-SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
-    imx-gpu-viv->kernel-module-imx-gpu-viv \
-    libimxvpuapi->virtual/imxvpu \
-    imx-vpuwrap->virtual/imxvpu \
-    imx-codec->virtual/imxvpu \
-    imx-test->virtual/imxvpu \
-"
 
 # Firmware used for boot.
 IMX_EXTRA_FIRMWARE                   ?= ""
@@ -111,10 +88,6 @@ IMX_EXTRA_FIRMWARE:mx8-generic-bsp    = "firmware-imx-8 imx-sc-firmware imx-seco
 IMX_EXTRA_FIRMWARE:mx8m-generic-bsp   = "firmware-imx-8m"
 
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
-
-# Extra QCA Wi-Fi & BTE driver and firmware
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'packagegroup-fsl-qca6174', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'packagegroup-fsl-qca9377', '', d)}"
 
 # Extra udev rules
 MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
@@ -124,12 +97,7 @@ MACHINE_EXTRA_RRECOMMENDS += " \
     ${@bb.utils.filter('COMBINED_FEATURES', 'jailhouse', d)} \
 "
 
-# Determines if the SoC has support for Vivante kernel driver
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT        = "0"
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT:imxgpu = "1"
-
 # Handle default kernel
-IMX_DEFAULT_KERNEL:imx-mainline-bsp = "linux-fslc"
 IMX_DEFAULT_KERNEL:imx-nxp-bsp      = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
