@@ -2,5 +2,4 @@ build/
 poky/
 meta-openembedded/
 meta-imx/
-meta-freescale/
 poky/

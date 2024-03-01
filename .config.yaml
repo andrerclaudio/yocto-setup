@@ -18,24 +18,14 @@ repos:
   meta-openembedded:
     url: "https://github.com/openembedded/meta-openembedded"
     branch: kirkstone
-    layers: 
-      meta-oe:
-      meta-python:
-      meta-multimedia:
-      meta-networking:
+    layers:
+      .: excluded
 
   meta-imx:
     url: "https://github.com/nxp-imx/meta-imx"
     branch: kirkstone-5.15.71-2.2.2
     layers:
       meta-bsp:
-      meta-sdk:
-
-  meta-freescale:
-    url: "https://github.com/Freescale/meta-freescale"
-    branch: kirkstone
-    # layers:
-      # Adding the meta-freescale layer itself
 
   meta-board-nxp:
     layers:
