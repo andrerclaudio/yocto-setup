@@ -17,11 +17,7 @@ IMAGE_FEATURES += " \
     tools-profile \
 "
 
-IMAGE_INSTALL += " \
-    firmwared \
-    packagegroup-imx-core-tools \
-    packagegroup-imx-security \
-"
+IMAGE_INSTALL += " "
 
 IMAGE_LINGUAS = " "
 
