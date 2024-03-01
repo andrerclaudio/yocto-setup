@@ -1,5 +1,3 @@
 build/
 poky/
 meta-openembedded/
-meta-imx/
-poky/

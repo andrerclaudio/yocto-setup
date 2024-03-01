@@ -21,12 +21,6 @@ repos:
     layers:
       .: excluded
 
-  meta-imx:
-    url: "https://github.com/nxp-imx/meta-imx"
-    branch: kirkstone-5.15.71-2.2.2
-    layers:
-      meta-bsp:
-
   meta-board-nxp:
     layers:
       meta-board-nxp:
