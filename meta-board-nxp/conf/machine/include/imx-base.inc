@@ -23,9 +23,7 @@ PREFERRED_PROVIDER_u-boot ??= "${IMX_DEFAULT_BOOTLOADER}"
 PREFERRED_PROVIDER_u-boot-mfgtool ??= "${IMX_DEFAULT_MFGTOOL}"
 PREFERRED_PROVIDER_virtual/bootloader ??= "${IMX_DEFAULT_BOOTLOADER}"
 
-# PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "u-boot-fslc-mxsboot-native"
-
-UBOOT_ENTRYPOINT:mx8m-generic-bsp   ?= "0x40480000"
+UBOOT_ENTRYPOINT ?= "0x40480000"
 
 # Some derivates can utilize the boot container provided by U-Boot,
 # below variable sets that those machines which have a imx-boot-container
@@ -54,19 +52,13 @@ IMX_DEFAULT_ATF_PROVIDER ??= "imx-atf"
 
 # FIXME: We should return INVALID here but currently only i.MX8M has support to override the UART
 # base address in source code.
-SOC_ATF_BOOT_UART_BASE                    = ""
+SOC_ATF_BOOT_UART_BASE = ""
 
-SOC_ATF_BOOT_UART_BASE:mx8m-generic-bsp   = "0x30890000"
-ATF_BOOT_UART_BASE                       ?= "${SOC_ATF_BOOT_UART_BASE}"
+SOC_ATF_BOOT_UART_BASE = "0x30890000"
+ATF_BOOT_UART_BASE ?= "${SOC_ATF_BOOT_UART_BASE}"
 
 # Ship kernel modules
 MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
-
-# Tunes for hard/soft float-point selection. Note that we allow building for
-# thumb support giving distros the chance to enable thumb by setting
-# ARM_INSTRUCTION_SET = "thumb"
-#
-DEFAULTTUNE:mx8m-generic-bsp   ?= "cortexa53-crypto"
 
 INHERIT += "machine-overrides-extender"
 
@@ -75,17 +67,12 @@ INHERIT += "machine-overrides-extender"
 #######
 MACHINEOVERRIDES_EXTENDER:mx8mn:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:mx8-generic-bsp:mx8-nxp-bsp:mx8m-generic-bsp:mx8m-nxp-bsp:mx8mn-generic-bsp:mx8mn-nxp-bsp"
 MACHINEOVERRIDES_FILTERED_OUT_QA_ERROR = "%s overrides cannot be used and need conversion to use the new BSP-specific overrides. Check 'meta-freescale/scripts/convert-bsp-specific-overrides'."
-# Sub-architecture support
-MACHINE_SOCARCH_SUFFIX ?= ""
-MACHINE_SOCARCH_SUFFIX:mx8mn-nxp-bsp   = "-mx8mn"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
 INHERIT += "fsl-dynamic-packagearch"
 
 # Firmware used for boot.
 IMX_EXTRA_FIRMWARE                   ?= ""
-IMX_EXTRA_FIRMWARE:mx8-generic-bsp    = "firmware-imx-8 imx-sc-firmware imx-seco"
-IMX_EXTRA_FIRMWARE:mx8m-generic-bsp   = "firmware-imx-8m"
 
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
@@ -98,7 +85,7 @@ MACHINE_EXTRA_RRECOMMENDS += " \
 "
 
 # Handle default kernel
-IMX_DEFAULT_KERNEL:imx-nxp-bsp      = "linux-imx"
+IMX_DEFAULT_KERNEL = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
@@ -131,35 +118,14 @@ WKS_FILE_DEPENDS ?= " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', '${OPTEE_WKS_FILE_DEPENDS}', '', d)} \
 "
 
-# We need to restrict the append so we don't add this for other i.MX SoC's.
-# Derivatives that are not yet adopted the usage of boot container provided
-# by U-Boot build are still targeted to use 'imx-boot' package provided by
-# NXP.
-#
-# Moving those derivatives to mainline BSP would require to define an
-# 'imx-boot-container' override, and test if the U-Boot built 'flash.bin'
-# binary is used a replacement.
-#
-# NOTE: the results binary name of the boot container is set to 'imx-boot'
-# for both NXP and Mainline BSP.
-WKS_FILE_DEPENDS:append:imx-generic-bsp:aarch64 = " \
-    ${@oe.utils.ifelse(d.getVar('UBOOT_PROVIDES_BOOT_CONTAINER') == '0', 'imx-boot', '')} \
-"
-
 SOC_DEFAULT_WKS_FILE ?= "imx-uboot-bootpart.wks.in"
-SOC_DEFAULT_WKS_FILE:mx8-generic-bsp ?= "imx-imx-boot-bootpart.wks.in"
-SOC_DEFAULT_WKS_FILE:mxs-generic-bsp ?= "imx-uboot-mxs-bootpart.wks.in"
-SOC_DEFAULT_WKS_FILE:mx9-generic-bsp ?= "imx-imx-boot-bootpart.wks.in"
 
 WKS_FILE ?= "${SOC_DEFAULT_WKS_FILE}"
-
-SERIAL_CONSOLES = "115200;ttymxc0"
-SERIAL_CONSOLES:mxs-generic-bsp = "115200;ttyAMA0"
 
 KERNEL_IMAGETYPE = "zImage"
 KERNEL_IMAGETYPE:aarch64 = "Image"
 
-HOSTTOOLS_NONFATAL:append:mx8-nxp-bsp = " sha384sum"
+HOSTTOOLS_NONFATAL:append = " sha384sum"
 
 # Allow meta-imx to add NIP devices information until upstreamed.
 include conf/machine/include/imx-base-extend.inc
