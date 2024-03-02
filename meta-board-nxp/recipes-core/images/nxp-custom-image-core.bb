@@ -11,10 +11,7 @@ inherit core-image
 
 IMAGE_FEATURES += " \
     debug-tweaks \
-    splash \
     ssh-server-openssh \
-    hwcodecs \
-    tools-profile \
 "
 
 IMAGE_INSTALL += " "
