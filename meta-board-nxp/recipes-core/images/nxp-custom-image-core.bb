@@ -9,9 +9,20 @@ LICENSE = "MIT"
 
 inherit core-image
 
+CORE_IMAGE_EXTRA_INSTALL:append = "\
+    packagegroup-core-boot \
+    packagegroup-core-full-cmdline \
+"
+
 IMAGE_FEATURES += " \
+    tools-profile \
     debug-tweaks \
     ssh-server-openssh \
+"
+
+# SPI Nor-Flash
+NETWORK_TOOLS:append:fsl-lsch3 = "\
+    mtd-utils \
 "
 
 IMAGE_INSTALL += " "
