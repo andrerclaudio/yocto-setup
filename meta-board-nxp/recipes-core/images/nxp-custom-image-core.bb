@@ -20,11 +20,6 @@ IMAGE_FEATURES += " \
     ssh-server-openssh \
 "
 
-# SPI Nor-Flash
-NETWORK_TOOLS:append:fsl-lsch3 = "\
-    mtd-utils \
-"
-
 IMAGE_INSTALL += " "
 
 IMAGE_LINGUAS = " "
