@@ -66,18 +66,18 @@ SOC_ATF_BOOT_UART_BASE                    = ""
 SOC_ATF_BOOT_UART_BASE:mx8m-generic-bsp   = "0x30890000"
 ATF_BOOT_UART_BASE                       ?= "${SOC_ATF_BOOT_UART_BASE}"
 
-# PREFERRED_PROVIDER_virtual/xserver      = "xserver-xorg"
-# XSERVER_DRIVER                          = "xf86-video-fbdev"
-# XSERVER_DRIVER:vf-generic-bsp           = "xf86-video-modesetting"
-# XSERVER_DRIVER:append:mx8-generic-bsp   = " xf86-video-modesetting"
-# XSERVER_DRIVER:imx-mainline-bsp = " \
-#     xf86-video-fbdev \
-#     xf86-video-modesetting \
-#     xserver-xorg-extension-glx \
-# "
-# XSERVER = "xserver-xorg \
-#            xf86-input-evdev \
-#            ${XSERVER_DRIVER}"
+PREFERRED_PROVIDER_virtual/xserver      = "xserver-xorg"
+XSERVER_DRIVER                          = "xf86-video-fbdev"
+XSERVER_DRIVER:vf-generic-bsp           = "xf86-video-modesetting"
+XSERVER_DRIVER:append:mx8-generic-bsp   = " xf86-video-modesetting"
+XSERVER_DRIVER:imx-mainline-bsp = " \
+    xf86-video-fbdev \
+    xf86-video-modesetting \
+    xserver-xorg-extension-glx \
+"
+XSERVER = "xserver-xorg \
+           xf86-input-evdev \
+           ${XSERVER_DRIVER}"
 
 # Ship kernel modules
 MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
@@ -118,11 +118,11 @@ MACHINE_SOCARCH_SUFFIX:mx8mn-nxp-bsp  = "-mx8mn"
 MACHINE_SOCARCH_SUFFIX:imx-mainline-bsp = "-imx"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
-# MACHINE_SOCARCH_FILTER:append:imx-nxp-bsp = " \
-#     alsa-lib \
-#     gstreamer1.0 \
-#     weston \
-# "
+MACHINE_SOCARCH_FILTER:append:imx-nxp-bsp = " \
+    alsa-lib \
+    gstreamer1.0 \
+    weston \
+"
 # MACHINE_SOCARCH_FILTER:append:imxvpu = " \
 #     imx-codec \
 #     imx-vpuwrap \
@@ -152,23 +152,23 @@ MACHINE_ARCH_FILTER = "virtual/kernel"
 #     virtual/libgles1 \
 #     virtual/libgles2 \
 # "
-# MACHINE_SOCARCH_FILTER:append:imx-mainline-bsp = " \
-#     virtual/egl \
-#     virtual/libopenvg \
-#     virtual/libg2d \
-#     virtual/libgl \
-#     virtual/libgles1 \
-#     virtual/libgles2 \
-#     virtual/mesa \
-#     cairo \
-#     pango \
-#     qtbase \
-# "
-# MACHINE_SOCARCH_FILTER:append:mx8-nxp-bsp = " \
-#     opencl-icd-loader \
-#     opencl-clhpp \
-#     opencl-headers \
-# "
+MACHINE_SOCARCH_FILTER:append:imx-mainline-bsp = " \
+    virtual/egl \
+    virtual/libopenvg \
+    virtual/libg2d \
+    virtual/libgl \
+    virtual/libgles1 \
+    virtual/libgles2 \
+    virtual/mesa \
+    cairo \
+    pango \
+    qtbase \
+"
+MACHINE_SOCARCH_FILTER:append:mx8-nxp-bsp = " \
+    opencl-icd-loader \
+    opencl-clhpp \
+    opencl-headers \
+"
 
 INHERIT += "fsl-dynamic-packagearch"
 
@@ -181,10 +181,10 @@ INHERIT += "fsl-dynamic-packagearch"
 # "
 
 # Firmware used for boot.
-# IMX_EXTRA_FIRMWARE                  ?= ""
-# IMX_EXTRA_FIRMWARE:mx8-generic-bsp   = "firmware-imx-8 imx-sc-firmware imx-seco"
-# IMX_EXTRA_FIRMWARE:mx8m-generic-bsp  = "firmware-imx-8m"
-# IMX_EXTRA_FIRMWARE:mx8x-generic-bsp  = "imx-sc-firmware imx-seco"
+IMX_EXTRA_FIRMWARE                  ?= ""
+IMX_EXTRA_FIRMWARE:mx8-generic-bsp   = "firmware-imx-8 imx-sc-firmware imx-seco"
+IMX_EXTRA_FIRMWARE:mx8m-generic-bsp  = "firmware-imx-8m"
+IMX_EXTRA_FIRMWARE:mx8x-generic-bsp  = "imx-sc-firmware imx-seco"
 
 # Firmware
 # MACHINE_FIRMWARE ?= ""
@@ -194,26 +194,26 @@ INHERIT += "fsl-dynamic-packagearch"
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
 # Extra audio support
-# IMX_ALSA_EXTRA = ""
-# IMX_ALSA_EXTRA:imx-nxp-bsp = "imx-alsa-plugins"
-# MACHINE_EXTRA_RRECOMMENDS:append:mx8-nxp-bsp = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '${IMX_ALSA_EXTRA}', '', d)}"
+IMX_ALSA_EXTRA = ""
+IMX_ALSA_EXTRA:imx-nxp-bsp = "imx-alsa-plugins"
+MACHINE_EXTRA_RRECOMMENDS:append:mx8-nxp-bsp = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '${IMX_ALSA_EXTRA}', '', d)}"
 
 # Extra Cypress Wi-Fi and BTW firmware (Murata)
-# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'linux-firmware-bcm4339', '', d)}"
-# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43430', 'linux-firmware-bcm43430', '', d)}"
-# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43455', 'linux-firmware-bcm43455', '', d)}"
-# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4356', 'linux-firmware-bcm4356-pcie', '', d)}"
-# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4359', 'linux-firmware-bcm4359-pcie', '', d)}"
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'linux-firmware-bcm4339', '', d)}"
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43430', 'linux-firmware-bcm43430', '', d)}"
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43455', 'linux-firmware-bcm43455', '', d)}"
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4356', 'linux-firmware-bcm4356-pcie', '', d)}"
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4359', 'linux-firmware-bcm4359-pcie', '', d)}"
 
 #Extra NXP89xx Wi-Fi and Bluetooth driver
-# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987', 'kernel-module-nxp89xx', '', d)}"
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987', 'kernel-module-nxp89xx', '', d)}"
 
 # Extra QCA Wi-Fi & BTE driver and firmware
-# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'packagegroup-fsl-qca6174', '', d)}"
-# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'packagegroup-fsl-qca9377', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'packagegroup-fsl-qca6174', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'packagegroup-fsl-qca9377', '', d)}"
 
 # Extra udev rules
-# MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
+MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
 
 # Jailhouse
 MACHINE_EXTRA_RRECOMMENDS += " \
@@ -221,8 +221,8 @@ MACHINE_EXTRA_RRECOMMENDS += " \
 "
 
 # GStreamer 1.0 plugins
-# MACHINE_GSTREAMER_1_0_PLUGIN                ?= ""
-# MACHINE_GSTREAMER_1_0_PLUGIN:mx8mn-nxp-bsp  ?= "imx-gst1.0-plugin"
+MACHINE_GSTREAMER_1_0_PLUGIN                ?= ""
+MACHINE_GSTREAMER_1_0_PLUGIN:mx8mn-nxp-bsp  ?= "imx-gst1.0-plugin"
 
 # PREFERRED_VERSION_gstreamer1.0:mx8-nxp-bsp              ??= "1.20.0.imx"
 # PREFERRED_VERSION_gstreamer1.0-plugins-base:mx8-nxp-bsp ??= "1.20.0.imx"
@@ -337,7 +337,7 @@ WKS_FILE ?= "${SOC_DEFAULT_WKS_FILE}"
 KERNEL_IMAGETYPE = "zImage"
 KERNEL_IMAGETYPE:aarch64 = "Image"
 
-# MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen"
+MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen"
 
 HOSTTOOLS_NONFATAL:append:mx8-nxp-bsp = " sha384sum"
 

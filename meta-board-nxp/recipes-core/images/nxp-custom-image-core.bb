@@ -16,11 +16,16 @@ CORE_IMAGE_EXTRA_INSTALL:append = "\
 
 IMAGE_FEATURES += " \
     tools-profile \
+    hwcodecs \
     debug-tweaks \
     ssh-server-openssh \
 "
 
-IMAGE_INSTALL += " "
+IMAGE_INSTALL += " \
+    firmwared \
+    packagegroup-imx-core-tools \
+    packagegroup-imx-security \
+"
 
 IMAGE_LINGUAS = " "
 

@@ -19,7 +19,10 @@ repos:
     url: "https://github.com/openembedded/meta-openembedded"
     branch: kirkstone
     layers:
-      .: excluded
+      meta-oe:
+      meta-python:
+      meta-networking:
+      meta-multimedia:
 
   meta-board-nxp:
     layers:
