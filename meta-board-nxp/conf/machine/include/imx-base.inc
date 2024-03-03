@@ -106,7 +106,11 @@ MACHINEOVERRIDES_EXTENDER:mx8mn:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxd
 
 MACHINEOVERRIDES_EXTENDER:mx8mn:use-mainline-bsp  = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8m-generic-bsp:mx8m-mainline-bsp:mx8mn-generic-bsp:mx8mn-mainline-bsp"
 
-MACHINEOVERRIDES_EXTENDER_FILTER_OUT = " mx8mn "
+MACHINEOVERRIDES_EXTENDER_FILTER_OUT = " \
+    mx8 \
+    mx8m \
+    mx8mn \
+"
 
 MACHINEOVERRIDES_FILTERED_OUT_QA_ERROR = "%s overrides cannot be used and need conversion to use the new BSP-specific overrides. Check 'meta-freescale/scripts/convert-bsp-specific-overrides'."
 
@@ -172,24 +176,23 @@ MACHINE_SOCARCH_FILTER:append:mx8-nxp-bsp = " \
 
 INHERIT += "fsl-dynamic-packagearch"
 
-# SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
-#     imx-gpu-viv->kernel-module-imx-gpu-viv \
-#     libimxvpuapi->virtual/imxvpu \
-#     imx-vpuwrap->virtual/imxvpu \
-#     imx-codec->virtual/imxvpu \
-#     imx-test->virtual/imxvpu \
-# "
+SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
+    imx-gpu-viv->kernel-module-imx-gpu-viv \
+    libimxvpuapi->virtual/imxvpu \
+    imx-vpuwrap->virtual/imxvpu \
+    imx-codec->virtual/imxvpu \
+    imx-test->virtual/imxvpu \
+"
 
 # Firmware used for boot.
 IMX_EXTRA_FIRMWARE                  ?= ""
 IMX_EXTRA_FIRMWARE:mx8-generic-bsp   = "firmware-imx-8 imx-sc-firmware imx-seco"
 IMX_EXTRA_FIRMWARE:mx8m-generic-bsp  = "firmware-imx-8m"
-IMX_EXTRA_FIRMWARE:mx8x-generic-bsp  = "imx-sc-firmware imx-seco"
 
 # Firmware
-# MACHINE_FIRMWARE ?= ""
+MACHINE_FIRMWARE ?= ""
 # MACHINE_FIRMWARE:append:mx8mn-generic-bsp  = " linux-firmware-imx-sdma-imx7d"
-# MACHINE_FIRMWARE:append:imx-mainline-bsp   = " linux-firmware-imx-sdma-imx6q linux-firmware-imx-sdma-imx7d firmware-imx-vpu-imx6q firmware-imx-vpu-imx6d"
+MACHINE_FIRMWARE:append:imx-mainline-bsp   = " linux-firmware-imx-sdma-imx6q linux-firmware-imx-sdma-imx7d firmware-imx-vpu-imx6q firmware-imx-vpu-imx6d"
 
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
@@ -207,6 +210,25 @@ MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4359', 
 
 #Extra NXP89xx Wi-Fi and Bluetooth driver
 MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987', 'kernel-module-nxp89xx', '', d)}"
+
+# Extra NXP Wi-Fi and Bluetooth driver firmware and driver
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8801-sdio', 'firmware-nxp-wifi-nxp8801-sdio', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8801-sdio', 'kernel-module-nxp89xx', '', d)}"
+
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'firmware-nxp-wifi-nxp8987-sdio', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'kernel-module-nxp89xx', '', d)}"
+
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-pcie', 'firmware-nxp-wifi-nxp8997-pcie', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-pcie', 'kernel-module-nxp89xx', '', d)}"
+
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-sdio', 'firmware-nxp-wifi-nxp8997-sdio', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-sdio', 'kernel-module-nxp89xx', '', d)}"
+
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-pcie', 'firmware-nxp-wifi-nxp9098-pcie', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-pcie', 'kernel-module-nxp89xx', '', d)}"
+
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-sdio', 'firmware-nxp-wifi-nxp9098-sdio', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-sdio', 'kernel-module-nxp89xx', '', d)}"
 
 # Extra QCA Wi-Fi & BTE driver and firmware
 MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'packagegroup-fsl-qca6174', '', d)}"
@@ -232,12 +254,12 @@ MACHINE_GSTREAMER_1_0_PLUGIN:mx8mn-nxp-bsp  ?= "imx-gst1.0-plugin"
 
 # Determines if the SoC has support for Vivante kernel driver
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT        = "0"
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT:imxgpu = "0"
+SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT:imxgpu = "1"
 
 # Handle Vivante kernel driver setting:
 #   0 - machine does not have Vivante GPU driver support
 #   1 - machine has Vivante GPU driver support
-# MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT ?= "${SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT}"
+MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT ?= "${SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT}"
 
 # Graphics libraries
 # PREFERRED_PROVIDER_virtual/egl      ?= "mesa"
@@ -284,6 +306,7 @@ IMX_DEFAULT_KERNEL:imx-nxp-bsp      = "linux-imx"
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.gz wic.zst"
+SOC_DEFAULT_IMAGE_FSTYPES:mxs-generic-bsp = "uboot-mxsboot-sdcard wic.bmap wic.gz"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
@@ -328,11 +351,11 @@ WKS_FILE_DEPENDS:append:imx-generic-bsp:aarch64 = " \
 "
 
 SOC_DEFAULT_WKS_FILE ?= "imx-uboot-bootpart.wks.in"
-SOC_DEFAULT_WKS_FILE:mx8m-nxp-bsp ?= "imx-imx-boot-bootpart.wks.in"
-
 SOC_DEFAULT_WKS_FILE:mx8-nxp-bsp ?= "imx-imx-boot-bootpart.wks.in"
 
 WKS_FILE ?= "${SOC_DEFAULT_WKS_FILE}"
+
+SERIAL_CONSOLES:mxs-generic-bsp = "115200;ttyAMA0"
 
 KERNEL_IMAGETYPE = "zImage"
 KERNEL_IMAGETYPE:aarch64 = "Image"
