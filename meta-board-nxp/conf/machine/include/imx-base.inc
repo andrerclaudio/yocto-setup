@@ -173,9 +173,7 @@ MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT ?= "${SOC_HAS_VIVANTE_KERNEL_DRIVER_SU
 
 # Handle default kernel
 IMX_DEFAULT_KERNEL      = "linux-imx"
-
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
-
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.gz wic.zst"
 
 # Do not update fstab file when using wic images
@@ -218,7 +216,6 @@ WKS_FILE_DEPENDS ?= " \
 WKS_FILE_DEPENDS:append:aarch64 = " imx-boot"
 
 SOC_DEFAULT_WKS_FILE ?= "imx-uboot-bootpart.wks.in"
-
 WKS_FILE ?= "${SOC_DEFAULT_WKS_FILE}"
 
 KERNEL_IMAGETYPE = "zImage"
