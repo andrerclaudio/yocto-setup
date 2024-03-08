@@ -126,10 +126,14 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
 "
 
 # Firmware used for boot.
+IMX_EXTRA_FIRMWARE                  ?= ""
+# IMX_EXTRA_FIRMWARE:mx8-generic-bsp   = "firmware-imx-8 imx-sc-firmware imx-seco"
 IMX_EXTRA_FIRMWARE  = "firmware-imx-8m"
+# IMX_EXTRA_FIRMWARE:mx8x-generic-bsp  = "imx-sc-firmware imx-seco"
 
 # Firmware
 MACHINE_FIRMWARE ?= ""
+# MACHINE_FIRMWARE:append:mx8mn-generic-bsp  = " linux-firmware-imx-sdma-imx7d"
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
 # Extra audio support
@@ -189,6 +193,7 @@ IMAGE_BOOT_FILES ?= " \
 "
 
 ### wic default support
+OPTEE_WKS_FILE_DEPENDS         = "optee-os"
 OPTEE_WKS_FILE_DEPENDS:aarch64 = ""
 
 WKS_FILE_DEPENDS ?= " \
