@@ -104,37 +104,37 @@ MACHINEOVERRIDES_FILTERED_OUT_QA_ERROR = "%s overrides cannot be used and need c
 MACHINE_SOCARCH_SUFFIX  = "-mx8mn"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
-MACHINE_SOCARCH_FILTER:append = " \
-    alsa-lib \
-    gstreamer1.0 \
-    weston \
-"
-MACHINE_SOCARCH_FILTER:append = " \
-    opencl-icd-loader \
-    opencl-clhpp \
-    opencl-headers \
-"
+# MACHINE_SOCARCH_FILTER:append = " \
+#     alsa-lib \
+#     gstreamer1.0 \
+#     weston \
+# "
+# MACHINE_SOCARCH_FILTER:append = " \
+#     opencl-icd-loader \
+#     opencl-clhpp \
+#     opencl-headers \
+# "
 
 INHERIT += "fsl-dynamic-packagearch"
 
-SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
-    imx-gpu-viv->kernel-module-imx-gpu-viv \
-    libimxvpuapi->virtual/imxvpu \
-    imx-vpuwrap->virtual/imxvpu \
-    imx-codec->virtual/imxvpu \
-    imx-test->virtual/imxvpu \
-"
+# SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
+#     imx-gpu-viv->kernel-module-imx-gpu-viv \
+#     libimxvpuapi->virtual/imxvpu \
+#     imx-vpuwrap->virtual/imxvpu \
+#     imx-codec->virtual/imxvpu \
+#     imx-test->virtual/imxvpu \
+# "
 
 # Firmware used for boot.
-IMX_EXTRA_FIRMWARE                  ?= ""
+# IMX_EXTRA_FIRMWARE                  ?= ""
 # IMX_EXTRA_FIRMWARE:mx8-generic-bsp   = "firmware-imx-8 imx-sc-firmware imx-seco"
-IMX_EXTRA_FIRMWARE  = "firmware-imx-8m"
+# IMX_EXTRA_FIRMWARE  = "firmware-imx-8m"
 # IMX_EXTRA_FIRMWARE:mx8x-generic-bsp  = "imx-sc-firmware imx-seco"
 
 # Firmware
-MACHINE_FIRMWARE ?= ""
+# MACHINE_FIRMWARE ?= ""
 # MACHINE_FIRMWARE:append:mx8mn-generic-bsp  = " linux-firmware-imx-sdma-imx7d"
-MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
+# MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
 # Extra audio support
 IMX_ALSA_EXTRA = "imx-alsa-plugins"
@@ -153,18 +153,18 @@ MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sd
 MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'kernel-module-nxp89xx', '', d)}"
 
 # Extra udev rules
-MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
+# MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
 
 # Jailhouse
-MACHINE_EXTRA_RRECOMMENDS += " \
-    ${@bb.utils.filter('COMBINED_FEATURES', 'jailhouse', d)} \
-"
+# MACHINE_EXTRA_RRECOMMENDS += " \
+#     ${@bb.utils.filter('COMBINED_FEATURES', 'jailhouse', d)} \
+# "
 
 # GStreamer 1.0 plugins
-MACHINE_GSTREAMER_1_0_PLUGIN ?= "imx-gst1.0-plugin"
+# MACHINE_GSTREAMER_1_0_PLUGIN ?= "imx-gst1.0-plugin"
 
 # Determines if the SoC has support for Vivante kernel driver
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT = "1"
+SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT = "0"
 
 # Handle Vivante kernel driver setting:
 #   0 - machine does not have Vivante GPU driver support
