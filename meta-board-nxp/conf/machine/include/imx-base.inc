@@ -5,20 +5,11 @@ require conf/machine/include/utilities.inc
 # Machines or distros can define which BSP it should use by default. We are
 # intending to default for mainline BSP by default and specific machines or
 # DISTROs might change it if need.
-#
-# Two values are considered valid: mainline, nxp
-# IMX_DEFAULT_BSP ?= "mainline"
-
 MACHINEOVERRIDES =. "use-${IMX_DEFAULT_BSP}-bsp:"
 
 # UBOOT_BINARY is used inside the wks files to dynamically find the required
 # U-Boot file.
 UBOOT_BINARY ?= "u-boot.${UBOOT_SUFFIX}"
-
-# Using the 'IMX_DEFAULT_BOOTLOADER' the machine can support multiple bootloader
-# versions. This is done for NXP reference board where we support 'u-boot-fslc'
-# and 'u-boot-imx'.
-#
 IMX_DEFAULT_BOOTLOADER ??= "u-boot-imx"
 UBOOT_SUFFIX ?= "${UBOOT_SUFFIX:pn-${IMX_DEFAULT_BOOTLOADER}}"
 
@@ -38,7 +29,6 @@ UBOOT_ENTRYPOINT   = "0x40480000"
 # below variable sets that those machines which have a imx-boot-container
 # in their MACHINEOVERRIDES can inherit a imx-boot-container class
 UBOOT_PROVIDES_BOOT_CONTAINER = "0"
-# UBOOT_PROVIDES_BOOT_CONTAINER:imx-boot-container = "1"
 
 # Trusted Firmware for Cortex-A (TF-A) can have different providers, either
 # from upstream or from NXP downstream fork. Below variable defines which TF-A
@@ -73,15 +63,6 @@ XSERVER = "xserver-xorg \
 
 # Ship kernel modules
 MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
-
-# Tunes for hard/soft float-point selection. Note that we allow building for
-# thumb support giving distros the chance to enable thumb by setting
-# ARM_INSTRUCTION_SET = "thumb"
-#
-# handled by software
-# DEFAULTTUNE:mx6-generic-bsp ?= "cortexa9t-neon"
-# handled by hardware
-# 
 DEFAULTTUNE   ?= "cortexa53-crypto"
 
 INHERIT += "machine-overrides-extender"
@@ -104,37 +85,8 @@ MACHINEOVERRIDES_FILTERED_OUT_QA_ERROR = "%s overrides cannot be used and need c
 MACHINE_SOCARCH_SUFFIX  = "-mx8mn"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
-# MACHINE_SOCARCH_FILTER:append = " \
-#     alsa-lib \
-#     gstreamer1.0 \
-#     weston \
-# "
-# MACHINE_SOCARCH_FILTER:append = " \
-#     opencl-icd-loader \
-#     opencl-clhpp \
-#     opencl-headers \
-# "
 
 INHERIT += "fsl-dynamic-packagearch"
-
-# SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
-#     imx-gpu-viv->kernel-module-imx-gpu-viv \
-#     libimxvpuapi->virtual/imxvpu \
-#     imx-vpuwrap->virtual/imxvpu \
-#     imx-codec->virtual/imxvpu \
-#     imx-test->virtual/imxvpu \
-# "
-
-# Firmware used for boot.
-# IMX_EXTRA_FIRMWARE                  ?= ""
-# IMX_EXTRA_FIRMWARE:mx8-generic-bsp   = "firmware-imx-8 imx-sc-firmware imx-seco"
-# IMX_EXTRA_FIRMWARE  = "firmware-imx-8m"
-# IMX_EXTRA_FIRMWARE:mx8x-generic-bsp  = "imx-sc-firmware imx-seco"
-
-# Firmware
-# MACHINE_FIRMWARE ?= ""
-# MACHINE_FIRMWARE:append:mx8mn-generic-bsp  = " linux-firmware-imx-sdma-imx7d"
-# MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
 # Extra audio support
 IMX_ALSA_EXTRA = "imx-alsa-plugins"
@@ -151,25 +103,6 @@ MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987', 
 # Extra NXP Wi-Fi and Bluetooth driver firmware and driver
 MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'firmware-nxp-wifi-nxp8987-sdio', '', d)}"
 MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'kernel-module-nxp89xx', '', d)}"
-
-# Extra udev rules
-# MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
-
-# Jailhouse
-# MACHINE_EXTRA_RRECOMMENDS += " \
-#     ${@bb.utils.filter('COMBINED_FEATURES', 'jailhouse', d)} \
-# "
-
-# GStreamer 1.0 plugins
-# MACHINE_GSTREAMER_1_0_PLUGIN ?= "imx-gst1.0-plugin"
-
-# Determines if the SoC has support for Vivante kernel driver
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT = "0"
-
-# Handle Vivante kernel driver setting:
-#   0 - machine does not have Vivante GPU driver support
-#   1 - machine has Vivante GPU driver support
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT ?= "${SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT}"
 
 # Handle default kernel
 IMX_DEFAULT_KERNEL      = "linux-imx"
