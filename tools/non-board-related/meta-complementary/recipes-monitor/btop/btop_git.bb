@@ -13,6 +13,16 @@ PV = "1.0+git${SRCPV}"
 SRCREV = "fd2a2acdad6fbaad76846cb5e802cf2ae022d670"
 S = "${WORKDIR}/git"
 
-DEPENDS = ""
+DEPENDS += "ninja-native locale-setter"
 
 inherit cmake
+
+do_install () {
+    install -d ${D}${bindir}
+    install -m 0755 ${PN} ${D}${bindir}
+    # 
+	# ${datadir} means /usr/share/
+    install -d -m 755 ${D}${datadir}/${PN}/icons
+}
+
+FILES:${PN}-icons = "${datadir}/${PN}/icons"
