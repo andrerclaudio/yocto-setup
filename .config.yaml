@@ -9,7 +9,8 @@ target:
 repos:
   poky:
     url: "https://github.com/yoctoproject/poky.git"
-    branch: kirkstone
+    branch: mickledore
+    tag: mickledore-4.2.4
     layers:
       meta:
       meta-poky:
@@ -17,7 +18,7 @@ repos:
 
   meta-openembedded:
     url: "https://github.com/openembedded/meta-openembedded"
-    branch: kirkstone
+    branch: mickledore
     layers:
       meta-oe:
       meta-python:
@@ -41,9 +42,10 @@ local_conf_header:
     PATCHRESOLVE = "noop"
 
   packaging: |
-    # Switch to Debian packaging and include package-management in the image
+    # Switch to Debian packaging
     PACKAGE_CLASSES = "package_deb"
-    EXTRA_IMAGE_FEATURES += "package-management"
+    # Enable PR server to avoid version-going-backward issue
+    PRSERV_HOST = "localhost:0"
     
   cleaning: |
     # Remove the old image before the new one generated to save disk space
@@ -60,4 +62,5 @@ local_conf_header:
       HALT,${TMPDIR},100M,1K \
       HALT,${DL_DIR},100M,1K \
       HALT,${SSTATE_DIR},100M,1K \
-      HALT,/tmp,10M,1K"
+      HALT,/tmp,10M,1K \
+      "

@@ -51,8 +51,8 @@ IMX_DEFAULT_ATF_PROVIDER ??= "imx-atf"
 
 # FIXME: We should return INVALID here but currently only i.MX8M has support to override the UART
 # base address in source code.
-SOC_ATF_BOOT_UART_BASE                    = "0x30890000"
-ATF_BOOT_UART_BASE                       ?= "${SOC_ATF_BOOT_UART_BASE}"
+SOC_ATF_BOOT_UART_BASE              = "0x30890000"
+ATF_BOOT_UART_BASE                  ?= "${SOC_ATF_BOOT_UART_BASE}"
 
 PREFERRED_PROVIDER_virtual/xserver      = "xserver-xorg"
 XSERVER_DRIVER                          = "xf86-video-fbdev"

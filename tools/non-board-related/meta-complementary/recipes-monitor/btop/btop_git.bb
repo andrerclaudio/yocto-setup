@@ -13,7 +13,7 @@ PV = "1.0+git${SRCPV}"
 SRCREV = "fd2a2acdad6fbaad76846cb5e802cf2ae022d670"
 S = "${WORKDIR}/git"
 
-DEPENDS += "ninja-native locale-setter"
+DEPENDS += "ninja-native"
 
 inherit cmake
 
