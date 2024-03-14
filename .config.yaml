@@ -10,6 +10,7 @@ repos:
   poky:
     url: "https://github.com/yoctoproject/poky.git"
     branch: mickledore
+    commit: 7235399a86b134e57d5eb783d7f1f57ca0439ae5
     tag: mickledore-4.2.4
     layers:
       meta:
