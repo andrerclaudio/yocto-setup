@@ -301,6 +301,7 @@ MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen screen"
 HOSTTOOLS_NONFATAL:append:mx8-nxp-bsp = " sha384sum"
 
 # Add task to generate the mfgtool bundle for the image.
+IMAGE_CLASSES += "image_types_fsl"
 IMAGE_CLASSES:append:imx-generic-bsp = " image_populate_mfgtool"
 
 # Allow meta-imx to add NIP devices information until upstreamed.
