@@ -12,27 +12,15 @@ UBOOT_BINARY ?= "u-boot.${UBOOT_SUFFIX}"
 PREFERRED_PROVIDER_u-boot ??= "${IMX_DEFAULT_BOOTLOADER}"
 PREFERRED_PROVIDER_u-boot-mfgtool ??= "${IMX_DEFAULT_BOOTLOADER}"
 PREFERRED_PROVIDER_virtual/bootloader ??= "${IMX_DEFAULT_BOOTLOADER}"
-
-PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "u-boot-fslc-mxsboot-native"
+IMX_DEFAULT_UBOOTTOOLS = "u-boot-imx-tools"
+PREFERRED_PROVIDER_u-boot-mkimage-native = "${IMX_DEFAULT_UBOOTTOOLS}-native"
+PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "${IMX_DEFAULT_UBOOTTOOLS}-native"
 
 UBOOT_ENTRYPOINT   ?= "0x40480000"
 
 IMX_DEFAULT_ATF_PROVIDER ??= "imx-atf"
-
-# FIXME: We should return INVALID here but currently only i.MX8M has support to override the UART
-# base address in source code.
-SOC_ATF_BOOT_UART_BASE                    = ""
-
 SOC_ATF_BOOT_UART_BASE                    = "0x30890000"
 ATF_BOOT_UART_BASE                       ?= "${SOC_ATF_BOOT_UART_BASE}"
-
-PREFERRED_PROVIDER_virtual/xserver      = "xserver-xorg"
-XSERVER_DRIVER                          = "xf86-video-fbdev"
-XSERVER_DRIVER:append                   = " xf86-video-modesetting"
-
-XSERVER = "xserver-xorg \
-           xf86-input-evdev \
-           ${XSERVER_DRIVER}"
 
 # Ship kernel modules
 MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
@@ -66,22 +54,7 @@ MACHINE_ARCH_FILTER = "virtual/kernel"
 INHERIT += "fsl-dynamic-packagearch"
 
 # Firmware used for boot.
-IMX_EXTRA_FIRMWARE                   ?= ""
-
-# Firmware
-MACHINE_FIRMWARE ?= ""
-MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
-
-# Extra audio support
-IMX_ALSA_EXTRA = ""
-
-# Extra udev rules
-MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
-
-# Handle Vivante kernel driver setting:
-#   0 - machine does not have Vivante GPU driver support
-#   1 - machine has Vivante GPU driver support
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT ?= "0"
+IMX_EXTRA_FIRMWARE ?= ""
 
 # Handle default kernel
 IMX_DEFAULT_KERNEL      = "linux-imx"
@@ -93,34 +66,23 @@ SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.gz wic.zst"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-OPTEE_BIN_EXT ??= ""
-OPTEE_BOOT_IMAGE         = "tee.bin uTee-${OPTEE_BIN_EXT}"
-OPTEE_BOOT_IMAGE:aarch64 = "tee.bin"
-
 IMAGE_FSTYPES ?= "${SOC_DEFAULT_IMAGE_FSTYPES}"
 
 IMAGE_BOOT_FILES ?= " \
     ${KERNEL_IMAGETYPE} \
     ${@make_dtb_boot_files(d)} \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', '${OPTEE_BOOT_IMAGE}', '', d)} \
 "
-
-### wic default support
-OPTEE_WKS_FILE_DEPENDS         = "optee-os"
-OPTEE_WKS_FILE_DEPENDS:aarch64 = ""
 
 WKS_FILE_DEPENDS ?= " \
     virtual/bootloader \
     \
     e2fsprogs-native \
     bmap-tools-native \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', '${OPTEE_WKS_FILE_DEPENDS}', '', d)} \
 "
 
 WKS_FILE_DEPENDS:append:aarch64 = "imx-boot"
 
 SOC_DEFAULT_WKS_FILE ?= "imx-uboot-bootpart.wks.in"
-SOC_DEFAULT_WKS_FILE ?= "imx-imx-boot-bootpart.wks.in"
 
 WKS_FILE ?= "${SOC_DEFAULT_WKS_FILE}"
 
