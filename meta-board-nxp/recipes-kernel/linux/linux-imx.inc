@@ -4,7 +4,7 @@
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-inherit kernel-yocto kernel
+inherit kernel
 
 # Put a local version until we have a true SRCREV to point to
 LOCALVERSION ?= ""
