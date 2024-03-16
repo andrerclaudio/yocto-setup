@@ -4,7 +4,7 @@
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-inherit kernel-yocto kernel fsl-kernel-localversion fsl-vivante-kernel-driver-handler
+inherit kernel-yocto kernel
 
 # Put a local version until we have a true SRCREV to point to
 LOCALVERSION ?= ""
@@ -12,7 +12,7 @@ SCMVERSION ?= "y"
 SRCBRANCH ?= ""
 
 # Allow use of kernel as linux-mfgtool provider.
-PROVIDES += "linux-mfgtool"
+# PROVIDES += "linux-mfgtool"
 
 # Set the PV to the correct kernel version to satisfy the kernel version sanity check
 PV = "${LINUX_VERSION}+git${SRCPV}"
