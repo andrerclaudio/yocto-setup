@@ -88,123 +88,86 @@ MACHINEOVERRIDES_FILTERED_OUT_QA_ERROR = "%s overrides cannot be used and need c
 MACHINE_SOCARCH_SUFFIX:mx8mn-nxp-bsp   = "-mx8mn"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
-MACHINE_SOCARCH_FILTER:append:imx-nxp-bsp = " \
-    alsa-lib \
-    gstreamer1.0 \
-    weston \
-"
-MACHINE_SOCARCH_FILTER:append:imxvulkan = " \
-    vulkan-headers \
-    vulkan-loader \
-    vulkan-tools \
-    vulkan-validation-layers \
-"
-MACHINE_SOCARCH_FILTER:append:imxgpu = " \
-    virtual/egl \
-    virtual/libopenvg \
-    virtual/mesa \
-    virtual/opencl-icd \
-    libdrm \
-    cairo \
-    libgal-imx \
-    opencl-icd-loader \
-    opencl-clhpp \
-    opencl-headers \
-    opencv \
-    pango \
-"
-MACHINE_SOCARCH_FILTER:append:imxgpu2d = " \
-    virtual/libg2d \
-"
-MACHINE_SOCARCH_FILTER:append:imxgpu3d = " \
-    virtual/libgl \
-    virtual/libgles1 \
-    virtual/libgles2 \
-"
 
 INHERIT += "fsl-dynamic-packagearch"
 
-SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
-    imx-gpu-viv->kernel-module-imx-gpu-viv \
-    libimxvpuapi->virtual/imxvpu \
-    imx-vpuwrap->virtual/imxvpu \
-    imx-codec->virtual/imxvpu \
-    imx-test->virtual/imxvpu \
-"
+# SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS:append = " \
+#     imx-gpu-viv->kernel-module-imx-gpu-viv \
+#     libimxvpuapi->virtual/imxvpu \
+#     imx-vpuwrap->virtual/imxvpu \
+#     imx-codec->virtual/imxvpu \
+#     imx-test->virtual/imxvpu \
+# "
 
 # Firmware used for boot.
 IMX_EXTRA_FIRMWARE                   ?= ""
-IMX_EXTRA_FIRMWARE:mx8-generic-bsp    = "imx-boot-firmware-files imx-sc-firmware imx-seco"
-IMX_EXTRA_FIRMWARE:mx8m-generic-bsp   = "imx-boot-firmware-files"
+# IMX_EXTRA_FIRMWARE:mx8-generic-bsp    = "imx-boot-firmware-files imx-sc-firmware imx-seco"
+# IMX_EXTRA_FIRMWARE:mx8m-generic-bsp   = "imx-boot-firmware-files"
 
 # Firmware
 MACHINE_FIRMWARE ?= ""
-MACHINE_FIRMWARE:append:mx8mn-generic-bsp    = " linux-firmware-imx-sdma-imx7d firmware-imx-easrc-imx8mn"
-
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
 # Extra audio support
 IMX_ALSA_EXTRA = ""
-IMX_ALSA_EXTRA:imx-nxp-bsp = "imx-alsa-plugins"
-MACHINE_EXTRA_RRECOMMENDS:append:mx8-nxp-bsp = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '${IMX_ALSA_EXTRA}', '', d)}"
 
 # Extra Cypress Wi-Fi and BTW firmware (Murata)
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'linux-firmware-bcm4339', '', d)}"
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43430', 'linux-firmware-bcm43430', '', d)}"
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43455', 'linux-firmware-bcm43455', '', d)}"
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4356', 'linux-firmware-bcm4356-pcie', '', d)}"
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4359', 'firmware-nxp-wifi-bcm4359-pcie', '', d)}"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'linux-firmware-bcm4339', '', d)}"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43430', 'linux-firmware-bcm43430', '', d)}"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43455', 'linux-firmware-bcm43455', '', d)}"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4356', 'linux-firmware-bcm4356-pcie', '', d)}"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4359', 'firmware-nxp-wifi-bcm4359-pcie', '', d)}"
 
 # Extra NXP Wi-Fi and Bluetooth driver firmware and driver
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8801-sdio', 'firmware-nxp-wifi-nxp8801-sdio', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8801-sdio', 'kernel-module-nxp-wlan', '', d)}"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8801-sdio', 'firmware-nxp-wifi-nxp8801-sdio', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8801-sdio', 'kernel-module-nxp-wlan', '', d)}"
 
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'firmware-nxp-wifi-nxp8987-sdio', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'kernel-module-nxp-wlan', '', d)}"
-PREFERRED_RPROVIDER_linux-firmware-nxp8987-sdio = "firmware-nxp-wifi"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'firmware-nxp-wifi-nxp8987-sdio', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8987-sdio', 'kernel-module-nxp-wlan', '', d)}"
+# PREFERRED_RPROVIDER_linux-firmware-nxp8987-sdio = "firmware-nxp-wifi"
 
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-pcie', 'firmware-nxp-wifi-nxp8997-pcie', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-pcie', 'kernel-module-nxp-wlan', '', d)}"
-PREFERRED_RPROVIDER_linux-firmware-nxp8997-common = "firmware-nxp-wifi"
-PREFERRED_RPROVIDER_linux-firmware-nxp8997-pcie = "firmware-nxp-wifi"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-pcie', 'firmware-nxp-wifi-nxp8997-pcie', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-pcie', 'kernel-module-nxp-wlan', '', d)}"
+# PREFERRED_RPROVIDER_linux-firmware-nxp8997-common = "firmware-nxp-wifi"
+# PREFERRED_RPROVIDER_linux-firmware-nxp8997-pcie = "firmware-nxp-wifi"
 
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-sdio', 'firmware-nxp-wifi-nxp8997-sdio', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-sdio', 'kernel-module-nxp-wlan', '', d)}"
-PREFERRED_RPROVIDER_linux-firmware-nxp8997-sdio = "firmware-nxp-wifi"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-sdio', 'firmware-nxp-wifi-nxp8997-sdio', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp8997-sdio', 'kernel-module-nxp-wlan', '', d)}"
+# PREFERRED_RPROVIDER_linux-firmware-nxp8997-sdio = "firmware-nxp-wifi"
 
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-pcie', 'firmware-nxp-wifi-nxp9098-pcie', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-pcie', 'kernel-module-nxp-wlan', '', d)}"
-PREFERRED_RPROVIDER_linux-firmware-nxp9098-common = "firmware-nxp-wifi"
-PREFERRED_RPROVIDER_linux-firmware-nxp9098-pcie = "firmware-nxp-wifi"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-pcie', 'firmware-nxp-wifi-nxp9098-pcie', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-pcie', 'kernel-module-nxp-wlan', '', d)}"
+# PREFERRED_RPROVIDER_linux-firmware-nxp9098-common = "firmware-nxp-wifi"
+# PREFERRED_RPROVIDER_linux-firmware-nxp9098-pcie = "firmware-nxp-wifi"
 
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-sdio', 'firmware-nxp-wifi-nxp9098-sdio', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-sdio', 'kernel-module-nxp-wlan', '', d)}"
-PREFERRED_RPROVIDER_linux-firmware-nxp9098-sdio = "firmware-nxp-wifi"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-sdio', 'firmware-nxp-wifi-nxp9098-sdio', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxp9098-sdio', 'kernel-module-nxp-wlan', '', d)}"
+# PREFERRED_RPROVIDER_linux-firmware-nxp9098-sdio = "firmware-nxp-wifi"
 
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxpiw416-sdio', 'firmware-nxp-wifi-nxpiw416-sdio', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxpiw416-sdio', 'kernel-module-nxp-wlan', '', d)}"
-PREFERRED_RPROVIDER_linux-firmware-nxpiw416-sdio = "firmware-nxp-wifi"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxpiw416-sdio', 'firmware-nxp-wifi-nxpiw416-sdio', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxpiw416-sdio', 'kernel-module-nxp-wlan', '', d)}"
+# PREFERRED_RPROVIDER_linux-firmware-nxpiw416-sdio = "firmware-nxp-wifi"
 
-MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxpiw612-sdio', 'firmware-nxp-wifi-nxpiw612-sdio', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxpiw612-sdio', 'kernel-module-nxp-wlan', '', d)}"
-PREFERRED_RPROVIDER_linux-firmware-nxpiw612-sdio = "firmware-nxp-wifi"
+# MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxpiw612-sdio', 'firmware-nxp-wifi-nxpiw612-sdio', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'nxpiw612-sdio', 'kernel-module-nxp-wlan', '', d)}"
+# PREFERRED_RPROVIDER_linux-firmware-nxpiw612-sdio = "firmware-nxp-wifi"
 
 # Extra QCA Wi-Fi & BTE driver and firmware
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'packagegroup-fsl-qca6174', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'packagegroup-fsl-qca9377', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'packagegroup-fsl-qca6174', '', d)}"
+# MACHINE_EXTRA_RRECOMMENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'packagegroup-fsl-qca9377', '', d)}"
 
 # Extra udev rules
 MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
 
 # Jailhouse
-PREFERRED_PROVIDER_jailhouse:imx-nxp-bsp ?= "jailhouse-imx"
-MACHINE_EXTRA_RRECOMMENDS += " \
-    ${@bb.utils.filter('COMBINED_FEATURES', 'jailhouse', d)} \
-"
+# PREFERRED_PROVIDER_jailhouse:imx-nxp-bsp ?= "jailhouse-imx"
+# MACHINE_EXTRA_RRECOMMENDS += " \
+#     ${@bb.utils.filter('COMBINED_FEATURES', 'jailhouse', d)} \
+# "
 
 # Determines if the SoC has support for Vivante kernel driver
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT        = "0"
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT:imxgpu = "1"
+SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT:imxgpu = "0"
 
 # Handle Vivante kernel driver setting:
 #   0 - machine does not have Vivante GPU driver support
@@ -269,8 +232,6 @@ SERIAL_CONSOLES = "115200;ttymxc0"
 
 KERNEL_IMAGETYPE = "zImage"
 KERNEL_IMAGETYPE:aarch64 = "Image"
-
-MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen screen"
 
 HOSTTOOLS_NONFATAL:append:mx8-nxp-bsp = " sha384sum"
 
