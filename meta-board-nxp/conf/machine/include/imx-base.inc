@@ -16,23 +16,23 @@ IMX_DEFAULT_UBOOTTOOLS = "u-boot-imx-tools"
 PREFERRED_PROVIDER_u-boot-mkimage-native = "${IMX_DEFAULT_UBOOTTOOLS}-native"
 PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "${IMX_DEFAULT_UBOOTTOOLS}-native"
 
-UBOOT_ENTRYPOINT   ?= "0x40480000"
+UBOOT_ENTRYPOINT ?= "0x40480000"
 
 IMX_DEFAULT_ATF_PROVIDER ??= "imx-atf"
-SOC_ATF_BOOT_UART_BASE                    = "0x30890000"
-ATF_BOOT_UART_BASE                       ?= "${SOC_ATF_BOOT_UART_BASE}"
+SOC_ATF_BOOT_UART_BASE = "0x30890000"
+ATF_BOOT_UART_BASE ?= "${SOC_ATF_BOOT_UART_BASE}"
 
 # Ship kernel modules
 MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
 
-DEFAULTTUNE   ?= "cortexa53-crypto"
+DEFAULTTUNE ?= "cortexa53-crypto"
 
 INHERIT += "machine-overrides-extender"
 
-IMX_SOC_REV                    ??= "A0"
+IMX_SOC_REV ??= "A0"
 
-IMX_SOC_REV_LOWER   = "${@d.getVar('IMX_SOC_REV').lower()}"
-IMX_SOC_REV_UPPER   = "${@d.getVar('IMX_SOC_REV').upper()}"
+IMX_SOC_REV_LOWER = "${@d.getVar('IMX_SOC_REV').lower()}"
+IMX_SOC_REV_UPPER = "${@d.getVar('IMX_SOC_REV').upper()}"
 
 #######
 ### NXP BSP specific overrides
@@ -47,7 +47,7 @@ MACHINEOVERRIDES_EXTENDER_FILTER_OUT = " \
 MACHINEOVERRIDES_FILTERED_OUT_QA_ERROR = "%s overrides cannot be used and need conversion to use the new BSP-specific overrides. Check 'meta-freescale/scripts/convert-bsp-specific-overrides'."
 
 # Sub-architecture support
-MACHINE_SOCARCH_SUFFIX   = "-mx8mn"
+MACHINE_SOCARCH_SUFFIX = "-mx8mn"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
 
@@ -57,7 +57,7 @@ INHERIT += "fsl-dynamic-packagearch"
 IMX_EXTRA_FIRMWARE ?= ""
 
 # Handle default kernel
-IMX_DEFAULT_KERNEL      = "linux-imx"
+IMX_DEFAULT_KERNEL = "linux-mainline"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 

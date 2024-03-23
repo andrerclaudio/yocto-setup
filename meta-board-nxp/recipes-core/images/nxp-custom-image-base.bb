@@ -13,6 +13,5 @@ CORE_IMAGE_EXTRA_INSTALL:append = " packagegroup-core-full-cmdline "
 IMAGE_FEATURES += " \
     \
     splash \
-    debug-tweaks \
     \
 "
