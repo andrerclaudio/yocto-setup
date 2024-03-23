@@ -20,9 +20,6 @@ and enables:
  * the `poky` repository which contains the `meta` layer with all the "core" recipes and `bitbake` build engine.
  * the `meta-openembedded` repository which is a collection of layers to suppliment OE-Core with additional packages.<br>
    Note that ***meta-oe***, ***meta-python***, ***meta-multimedia*** and ***meta-networking*** are enabled in `build/conf/bblayers.conf`.
- * the `meta-imx` repository which contains the `meta-bsp` and
-   `meta-sdk` layers.
- * the `meta-freescale`, `meta-freescale-3rdparty` and `meta-freescale-distro`, are repositories which contains NXP board related layers and other files.
  * the `meta-board-nxp` layer, not downloaded as it is already part of this
    repository, but enabled in `build/conf/bblayers.conf`.<br>
    Please, refer to ***meta-board-nxp/README*** file to see more details about this layer and its goals.
@@ -48,10 +45,10 @@ pip install kas
 kas checkout
 
 # Initialize the build environment
-. openembedded-core/oe-init-build-env
+source poky/oe-init-build-env build
 
 # Run your first build
-bitbake nxp-custom-image-core
+bitbake -k nxp-custom-image-base
 
 #
 # Have dinner
@@ -60,6 +57,6 @@ bitbake nxp-custom-image-core
 # Find the output images here
 ls -l tmp-glibc/deploy/images/imx8mn-lpddr4-evk/
 
-# Flash the image (use your uSD card device instead of XYZ!):
-sudo bmaptool copy tmp-glibc/deploy/images/imx8mn-lpddr4-evk/nxp-custom-image-core-imx8mn-lpddr4-evk.wic /dev/XYZ
+# Flash the image (use the UUU tool from NXP):
+sudo uuu -b emmc_all imx-boot-imx8mn-lpddr4-evk-sd.bin-flash_evk nxp-custom-image-base-imx8mn-lpddr4-evk.wic.zst
 ```
