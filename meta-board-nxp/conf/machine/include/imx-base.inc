@@ -14,7 +14,6 @@ PREFERRED_PROVIDER_u-boot-mfgtool ??= "${IMX_DEFAULT_BOOTLOADER}"
 PREFERRED_PROVIDER_virtual/bootloader ??= "${IMX_DEFAULT_BOOTLOADER}"
 IMX_DEFAULT_UBOOTTOOLS = "u-boot-imx-tools"
 PREFERRED_PROVIDER_u-boot-mkimage-native = "${IMX_DEFAULT_UBOOTTOOLS}-native"
-PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "${IMX_DEFAULT_UBOOTTOOLS}-native"
 
 UBOOT_ENTRYPOINT ?= "0x40480000"
 

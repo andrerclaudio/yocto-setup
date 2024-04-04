@@ -43,10 +43,8 @@ local_conf_header:
     PATCHRESOLVE = "noop"
 
   packaging: |
-    # Switch to Debian packaging
-    PACKAGE_CLASSES = "package_deb"
-    # Enable PR server to avoid version-going-backward issue
-    PRSERV_HOST = "localhost:0"
+    # Switch to RPM packaging
+    PACKAGE_CLASSES = "package_rpm"
     
   cleaning: |
     # Remove the old image before the new one generated to save disk space
