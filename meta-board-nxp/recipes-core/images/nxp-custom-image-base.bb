@@ -17,4 +17,4 @@ IMAGE_FEATURES += " \
     \
 "
 
-IMAGE_INSTALL:append = " "
+IMAGE_INSTALL = "packagegroup-core-boot openssh"
