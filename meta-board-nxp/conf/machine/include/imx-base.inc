@@ -56,7 +56,7 @@ INHERIT += "fsl-dynamic-packagearch"
 IMX_EXTRA_FIRMWARE ?= ""
 
 # Handle default kernel
-IMX_DEFAULT_KERNEL = "linux-mainline"
+IMX_DEFAULT_KERNEL = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 

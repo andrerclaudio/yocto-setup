@@ -8,7 +8,7 @@ LICENSE = "MIT"
 
 inherit core-image
 
-CORE_IMAGE_EXTRA_INSTALL:append = " packagegroup-core-full-cmdline"
+CORE_IMAGE_EXTRA_INSTALL:append = " "
 
 IMAGE_FEATURES += " \
     \

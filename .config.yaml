@@ -22,9 +22,6 @@ repos:
     branch: mickledore
     layers:
       meta-oe:
-      meta-python:
-      meta-networking:
-      meta-multimedia:
 
   meta-board-nxp:
     layers:
