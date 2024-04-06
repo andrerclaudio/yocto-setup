@@ -6,8 +6,6 @@ hardware in its minimun version."
 
 LICENSE = "MIT"
 
-inherit core-image
-
 CORE_IMAGE_EXTRA_INSTALL:append = " "
 
 IMAGE_FEATURES += " \
@@ -17,4 +15,8 @@ IMAGE_FEATURES += " \
     \
 "
 
-IMAGE_INSTALL = "packagegroup-core-boot openssh"
+IMAGE_INSTALL = "packagegroup-core-boot"
+IMAGE_INSTALL += " ${@bb.utils.contains("IMAGE_FEATURES", "debug-tweaks", "packagegroup-eval", "", d)}"
+# IMAGE_INSTALL += " ${@bb.utils.contains("DISTRO_FEATURES", "wifi", "packagegroup-fsl-network", "", d)}"
+
+inherit core-image
