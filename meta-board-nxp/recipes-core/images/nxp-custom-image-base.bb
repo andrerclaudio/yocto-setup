@@ -1,24 +1,20 @@
-DESCRIPTION = "A console-only image that fully supports the target device \
-hardware in its minimun version."
+DESCRIPTION = "A simple image with network compatibility."
 
 LICENSE = "MIT"
 
-inherit core-image
+IMAGE_INSTALL:append    = " "
 
-IMAGE_INSTALL += " \
-    iperf3 \
-"
-
-IMAGE_FEATURES += " \
-    debug-tweaks \
-"
+IMAGE_FEATURES:append   = " "
 
 CORE_IMAGE_EXTRA_INSTALL:append = "\
     packagegroup-core-boot \
     packagegroup-fsl-network \
+    packagegroup-eval \
 "
 
 # SPI Nor-Flash
 NETWORK_TOOLS:append:fsl-lsch3 = "\
     mtd-utils \
 "
+
+inherit core-image
