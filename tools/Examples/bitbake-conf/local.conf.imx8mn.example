@@ -76,9 +76,7 @@ hostname:pn-base-files = "iMX8mn-evk"
 # BB_NUMBER_THREADS = "9"
 # PARALLEL_MAKE = "-j 9"
 
-# Add to your layers "meta-wireless-hwinit"
-# INIT_MANAGER = "systemd"
-# DISTRO_FEATURES:append = " wifi"
+# Add to your layers "meta-wireless-NXP" to have wifi hardware working.
 
 # Set GLIBC_GENERATE_LOCALES to the locales you wish to generate should you not
 # wish to perform the time-consuming step of generating all LIBC locales.
