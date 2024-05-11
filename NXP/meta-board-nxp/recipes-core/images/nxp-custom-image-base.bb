@@ -2,7 +2,7 @@ DESCRIPTION = "A simple image with network compatibility."
 
 LICENSE = "MIT"
 
-IMAGE_INSTALL:append    = " btop locale-setter"
+IMAGE_INSTALL:append    = " btop locale-setter util-linux"
 
 IMAGE_FEATURES:append   = " debug-tweaks dev-pkgs"
 
