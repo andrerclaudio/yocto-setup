@@ -1,5 +1,5 @@
 [Unit]
-Description=GNU Hardware Stats presented in an Oled Display service as a
+Description=Hardware Stats presented in an Oled Display as a service
 
 [Service]
 Type=simple
