@@ -325,7 +325,10 @@ PRSERV_HOST = "localhost:0"
 ACCEPT_EULA_stm32mp13-disco = "1"
 
 # Install some tools
-IMAGE_INSTALL:append = " tzdata nano htop git iperf3 libgpiod python3 python3-pip python3-gpiod openssh util-linux"
+IMAGE_INSTALL:append = " tzdata nano htop git iperf3 libgpiod python3 \
+                        python3-pip python3-gpiod openssh util-linux \
+                        procps \
+                        "
 # Set timezone area
 DEFAULT_TIMEZONE = "America/Sao_Paulo"
 
