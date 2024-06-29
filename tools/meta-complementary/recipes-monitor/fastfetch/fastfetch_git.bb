@@ -10,12 +10,12 @@ HOMEPAGE = "https://github.com/fastfetch-cli/fastfetch"
 LICENSE = "MIT"
 
 # Specify the source URI and its checksum for validation.
-SRC_URI = "git://github.com/fastfetch-cli/fastfetch;protocol=https;branch=dev"
+SRC_URI = "git://github.com/fastfetch-cli/fastfetch;protocol=https;branch=master"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 # Versioning based on git commit information.
 PV = "1.0+git${SRCPV}"
-SRCREV = "da0db042fa193e555b7ca8aa70c8962018843f0f"
+SRCREV = "ca6e889a63c0b3660ee9ac6ae6c346344d0b039b"
 S = "${WORKDIR}/git"
 
 # Inherit the cmake class for building the project.
