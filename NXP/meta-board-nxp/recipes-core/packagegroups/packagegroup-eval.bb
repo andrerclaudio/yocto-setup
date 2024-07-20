@@ -10,5 +10,9 @@ RDEPENDS:${PN} += " \
     nano \
     iperf3 \
     openssh \
+    util-linux \
+    procps \
+    btop \
+    locale-setter \
     \
 "
