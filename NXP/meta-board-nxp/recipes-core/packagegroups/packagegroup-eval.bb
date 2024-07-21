@@ -10,6 +10,7 @@ RDEPENDS:${PN} += " \
     nano \
     iperf3 \
     openssh \
+    fastfetch \
     util-linux \
     procps \
     btop \
