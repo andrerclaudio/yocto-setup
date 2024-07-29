@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# pylint: disable=line-too-long
 # indent = tab
 # tab-size = 4
 
@@ -65,30 +64,30 @@ class MQTTConnectionError(Exception):
         super().__init__(self.message)
 
 
-class AgnesMqttClient(object):
+class CustomMqttClient(object):
     """
-    AgnesMqttClient class for handling MQTT communication.
+    CustomMqttClient class for handling MQTT communication.
 
-    This class encapsulates an MQTT client with specific configurations for the Agnes
+    This class encapsulates an MQTT client with specific configurations for the Custom
     application. It provides methods and attributes for setting up and interacting
     with the MQTT broker.
 
     Attributes:
-        TOPIC (str): The MQTT topic to subscribe to ("agnes.mqtt").
+        TOPIC (str): The MQTT topic to subscribe to ("sustom.mqtt").
         CLIENT_ID (str): The client ID for the MQTT broker ("bridge").
         mqttc (paho.mqtt.client.Client): The MQTT client instance.
 
     Example:
-        # Create an instance of AgnesMqttClient
-        agnes_client = AgnesMqttClient()
+        # Create an instance of CustomMqttClient
+        custom_client = CustomMqttClient()
 
         # Perform further configuration if needed
 
     """
 
-    def __init__(self, topic, client_id='iMx8mn-evk') -> None:
+    def __init__(self, topic, client_id='board') -> None:
         """
-        Initialize an instance of AgnesMqttClient.
+        Initialize an instance of CustomMqttClient.
 
         This constructor sets up the MQTT client with predefined configurations,
         including the topic and client ID.
@@ -100,12 +99,12 @@ class AgnesMqttClient(object):
         self.CLIENT_ID = client_id
 
         # MQTT client setup
-        self.mqttc = mqtt.Client(self.CLIENT_ID)
+        self.mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, self.CLIENT_ID)
         self.mqttc.on_connect = self.__on_connect
         self.mqttc.on_message = self.__on_message
 
 
-    def __on_connect(self, client, userdata, flags, rc) -> None:
+    def __on_connect(self, client, userdata, flags, rc, properties=None) -> None:
         """
         MQTT on_connect callback function.
 
@@ -117,6 +116,7 @@ class AgnesMqttClient(object):
             userdata (Any): User-defined data passed to the client.
             flags (dict): Flags indicating specific MQTT connection flags.
             rc (int): The connection result code.
+            properties (Optional): Additional properties associated with the connection.
 
         Returns:
             None
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     # Init the Mqtt class.
     BROKER_ADDRESS = "mqtt.eclipseprojects.io"
     PORT = 1883
-    client = AgnesMqttClient(str(args.topic))
+    client = CustomMqttClient(str(args.topic))
 
     try:
         # Start Mqtt client.
