@@ -179,7 +179,7 @@ class CustomMqttClient(object):
 
 
 if __name__ == "__main__":
-    # Script starting point.
+    # Mqtt code to publish messages to the specified topic.
 
     parser = argparse.ArgumentParser(description="Publish messages to Mqtt Topic.",
                                      usage="\n$%(prog)s -p topic-to-publish 'message to publish'")
