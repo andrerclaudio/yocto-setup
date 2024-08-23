@@ -27,7 +27,7 @@ do_install:append () {
 
     # Create a symbolic link for systemd service
     install -d ${D}/etc/systemd/system/multi-user.target.wants/
-    ln -s /lib/system/wpa_supplicant@.service ${D}/etc/systemd/system/multi-user.target.wants/wpa_supplicant-nl80211@wlan0.service
+    ln -s /lib/systemd/system/wpa_supplicant@.service ${D}/etc/systemd/system/multi-user.target.wants/wpa_supplicant-nl80211@wlan0.service
 }
 
 FILES:${PN} =  "/lib/systemd/network/51-wireless.network \
