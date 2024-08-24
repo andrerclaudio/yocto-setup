@@ -4,9 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 # Specify source URIs for configuration files
-SRC_URI =   "file://token.conf \
-            "
-
+SRC_URI =   "file://token.conf"
 # Inherit features_check to check required features
 inherit features_check
 # Specify that the image requires systemd service manager

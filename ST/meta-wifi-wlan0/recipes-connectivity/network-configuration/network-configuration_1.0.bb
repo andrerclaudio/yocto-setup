@@ -10,6 +10,8 @@ SRC_URI = "file://51-wireless.network \
 inherit features_check
 # Specify that the image requires systemd service manager
 REQUIRED_DISTRO_FEATURES = "systemd"
+# Specify runtime dependencies
+RDEPENDS:${PN} = "networkmanager"
 # Enable automatic starting of the systemd service
 SYSTEMD_AUTO_ENABLE = "enable"
 # Append the systemd service for wpa_supplicant to start automatically
