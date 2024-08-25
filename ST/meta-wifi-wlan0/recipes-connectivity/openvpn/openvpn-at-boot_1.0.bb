@@ -19,14 +19,16 @@ SYSTEMD_SERVICE:${PN}:append = " openvpn-client@token.service"
 # Installation task
 do_install:append () {    
     # Install Client Token configuration file
-    install -d ${D}/etc/openvpn/client/
-    install -D -m 600 ${WORKDIR}/token.conf ${D}/etc/openvpn/client/
+    install -d ${D}${sysconfdir}/openvpn/client/
+    install -D -m 600 ${WORKDIR}/token.conf ${D}${sysconfdir}/openvpn/client/
 
     # Create a symbolic link for systemd service
-    install -d ${D}/etc/systemd/system/multi-user.target.wants/
-    ln -s /lib/systemd/system/openvpn-client@.service ${D}/etc/systemd/system/multi-user.target.wants/openvpn-client@token.service 
+    install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants/
+    ln -s ${systemd_system_unitdir}/openvpn-client@.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/openvpn-client@token.service 
 }
 
-FILES:${PN} =   "/etc/openvpn/client/token.conf \
-                /etc/systemd/system/multi-user.target.wants/openvpn-client@token.service \
+FILES:${PN} =   "\
+                ${sysconfdir}/openvpn/client/token.conf \
+                ${sysconfdir}/systemd/system/multi-user.target.wants/openvpn-client@token.service \
+                \
                 "
