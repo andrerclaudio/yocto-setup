@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 
 # Versioning based on git commit information.
 PV = "1.0+git${SRCPV}"
-SRCREV = "ff8e0e72d21e1f599ce7d04a2236c7f5141b6d1e"
+SRCREV = "e9bb761a2d83c9a2f7a969a5ea8fba2898e89318"
 S = "${WORKDIR}/git"
 
 # Inherit the cmake class for building the project.
