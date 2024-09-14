@@ -22,12 +22,11 @@ SRC_URI += " \
             "
 SRC_URI:append:stm32mpcommon = " file://check-gpu "
 
-
 # backgrounds
-SRC_URI:append:stm32mp1common = " file://ST30739_background-1280x720.png "
-SRC_URI:append:stm32mp2common = " file://ST30739_background-1920x1080.png "
-DEFAULT_WESTON_BACKGROUND ??= "ST30739_background-1280x720.png"
-DEFAULT_WESTON_BACKGROUND:stm32mp2common ??= "ST30739_background-1920x1080.png"
+SRC_URI:append:stm32mp1common = " file://bkground_689d6a-1280x720.png "
+SRC_URI:append:stm32mp2common = " file://bkground_689d6a-1920x1080.png "
+DEFAULT_WESTON_BACKGROUND ??= "bkground_689d6a-1280x720.png"
+DEFAULT_WESTON_BACKGROUND:stm32mp2common ??= "bkground_689d6a-1920x1080.png"
 
 WESTON_HDMI_MODE ??= "1280x720"
 

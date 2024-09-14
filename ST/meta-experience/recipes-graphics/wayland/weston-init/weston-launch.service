@@ -16,7 +16,6 @@ After=systemd-user-sessions.service
 Wants=dbus.socket
 After=dbus.socket
 
-After=psplash-drm-wait.service
 After=weston-checkgpu.service
 # Since we are part of the graphical session, make sure we are started before
 # it is complete.
