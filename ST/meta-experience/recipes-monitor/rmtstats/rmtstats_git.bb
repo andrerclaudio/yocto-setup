@@ -16,7 +16,7 @@ SRCREV = "e7c11f5ff2aca3e2181c2c9d806048fbef64e372"
 S = "${WORKDIR}/git"
 
 # Define runtime dependencies for this package.
-RDEPENDS:${PN} = "python3-core python3-paramiko python3-pygobject gtk+3 python3-resource python3-threading"
+RDEPENDS:${PN} = "python3-core python3-modules python3-paramiko python3-pygobject gtk+3 python3-resource python3-threading "
 
 # Skip the configure and compile tasks as they are not needed for this package.
 do_configure[noexec] = "1"
