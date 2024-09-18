@@ -12,11 +12,19 @@ SRC_URI += "file://launch-rmtstats-gtk.sh"
 
 # Set version based on the Git commit information.
 PV = "1.0+git${SRCPV}"
-SRCREV = "e7c11f5ff2aca3e2181c2c9d806048fbef64e372"
+SRCREV = "1cfcf7cafc2aa1714ae62d2abc20c3b0294d7e8f"
 S = "${WORKDIR}/git"
 
 # Define runtime dependencies for this package.
-RDEPENDS:${PN} = "python3-core python3-modules python3-paramiko python3-pygobject gtk+3 python3-resource python3-threading "
+RDEPENDS:${PN} = " \
+                    gtk+3 \
+                    python3-core \
+                    python3-modules \
+                    python3-paramiko \
+                    python3-pygobject \
+                    python3-threading \
+                    python3-psutil \
+                "
 
 # Skip the configure and compile tasks as they are not needed for this package.
 do_configure[noexec] = "1"

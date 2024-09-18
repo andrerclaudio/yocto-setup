@@ -1,13 +1,14 @@
 SUMMARY = "A very basic Wayland image with a terminal"
 
-IMAGE_FEATURES += "ssh-server-openssh hwcodecs weston"
+IMAGE_FEATURES += "hwcodecs weston"
 
 LICENSE = "MIT"
 
 # Install some tools
-IMAGE_INSTALL:append = " openssh network-configuration openvpn-at-boot rmtstats"
+IMAGE_INSTALL:append = " network-configuration openvpn-at-boot rmtstats"
 
-IMAGE_INSTALL:append = " procps util-linux nano"
+# Complementary 
+# IMAGE_INSTALL:append = " procps util-linux nano"
 
 # Adjust Time and Zone
 IMAGE_INSTALL:append = " tzdata"
