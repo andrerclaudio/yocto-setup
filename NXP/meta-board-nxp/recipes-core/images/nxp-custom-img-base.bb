@@ -25,6 +25,9 @@ NETWORK_TOOLS:append:fsl-lsch3      = " \
                                         \
                                     "                        
 
+# Remote access tool
+# IMAGE_INSTALL:append = " openvpn-at-boot"
+
 IMAGE_FEATURES  += "${@bb.utils.contains('CORE_IMAGE_EXTRA_INSTALL', 'packagegroup-imx-tools-audio', 'hwcodecs', '', d)}"
 IMAGE_FEATURES  += "${@bb.utils.contains('CORE_IMAGE_EXTRA_INSTALL', 'packagegroup-eval', 'debug-tweaks', '', d)}"
 IMAGE_FEATURES  += "${@bb.utils.contains('CORE_IMAGE_EXTRA_INSTALL', 'packagegroup-dev', 'dev-pkgs', '', d)}"
