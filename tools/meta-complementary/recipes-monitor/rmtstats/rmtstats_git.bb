@@ -12,12 +12,15 @@ SRC_URI += "file://launch-rmtstats-gtk.sh"
 
 # Set version based on the Git commit information.
 PV = "1.0+git${SRCPV}"
-SRCREV = "1cfcf7cafc2aa1714ae62d2abc20c3b0294d7e8f"
+SRCREV = "d1f9ce3a655bfba012634d1304c54e281c91f2e8"
 S = "${WORKDIR}/git"
+
+inherit features_check
+REQUIRED_DISTRO_FEATURES = "wayland pam"
 
 # Define runtime dependencies for this package.
 RDEPENDS:${PN} = " \
-                    gtk+3 \
+                    gtk4 \
                     python3-core \
                     python3-modules \
                     python3-paramiko \

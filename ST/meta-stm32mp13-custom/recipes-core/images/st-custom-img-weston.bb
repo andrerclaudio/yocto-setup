@@ -5,10 +5,10 @@ IMAGE_FEATURES += "hwcodecs weston"
 LICENSE = "MIT"
 
 # Install some tools
-IMAGE_INSTALL:append = " network-configuration openvpn-at-boot rmtstats"
+IMAGE_INSTALL:append = " network-configuration rmtstats"
 
 # Complementary 
-# IMAGE_INSTALL:append = " procps util-linux nano"
+IMAGE_INSTALL:append = " procps util-linux nano"
 
 # Adjust Time and Zone
 IMAGE_INSTALL:append = " tzdata"
@@ -23,5 +23,3 @@ BBMASK += "${ST_ECOSYSTEM_GRAPHICAL_PATH}/wayland/weston-init.bbappend"
 IMAGE_FSTYPES:remove = " tar.xz"
 
 inherit core-image
-
-QB_MEM = "-m 512"
