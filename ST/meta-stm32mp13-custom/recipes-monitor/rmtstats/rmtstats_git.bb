@@ -12,7 +12,7 @@ SRC_URI += "file://launch-rmtstats-gtk.sh"
 
 # Set version based on the Git commit information.
 PV = "1.0+git${SRCPV}"
-SRCREV = "d1f9ce3a655bfba012634d1304c54e281c91f2e8"
+SRCREV = "ccaf7b772205988fb555b8298182d07cdeeee7a3"
 S = "${WORKDIR}/git"
 
 inherit features_check
@@ -36,12 +36,18 @@ do_compile[noexec] = "1"
 do_install () {
     # Create necessary directories for installation.
     install -d ${D}${bindir}
+    install -d ${D}${bindir}/rmtstats/
     install -d ${D}${datadir}/weston-start-at-startup/
-
     # Install the Python script and the shell script to their respective locations.
-    install -m 0755 ${S}/rmtstats.py ${D}${bindir}/rmtstats
+    install -m 0755 ${S}/rmtstats.py ${D}${bindir}/rmtstats/rmtstats
+    install -m 0755 ${S}/commands.py ${D}${bindir}/rmtstats/
+    install -m 0755 ${S}/widget.py ${D}${bindir}/rmtstats/
+    install -m 0755 ${S}/core.py ${D}${bindir}/rmtstats/
     install -m 0755 ${WORKDIR}/launch-rmtstats-gtk.sh ${D}${datadir}/weston-start-at-startup/
 }
 
 # Specify additional files that should be included in the package.
-FILES:${PN} += " ${datadir}/weston-start-at-startup"
+FILES:${PN} +=  " \
+                    ${datadir}/weston-start-at-startup \
+                    ${bindir}/rmtstats/* \
+                "
