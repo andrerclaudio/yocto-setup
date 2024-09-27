@@ -35,7 +35,6 @@ do_compile[noexec] = "1"
 
 do_install () {
     # Create necessary directories for installation.
-    install -d ${D}${bindir}
     install -d ${D}${bindir}/rmtstats/
     install -d ${D}${datadir}/weston-start-at-startup/
     # Install the Python script and the shell script to their respective locations.
