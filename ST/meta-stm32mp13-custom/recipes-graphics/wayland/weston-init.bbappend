@@ -109,7 +109,7 @@ do_install:append() {
     # udev rules for galcore
     install -D -p -m0644 ${WORKDIR}/72-galcore.rules ${D}${sysconfdir}/udev/rules.d/72-galcore.rules
 
-    # AUDIO: swith between analog stero and HDMI
+    # AUDIO: switch between analog stero and HDMI
     install -d ${D}${sysconfdir}/default
     install -m 0644 ${WORKDIR}/default_pulseaudio_profile ${D}${sysconfdir}/default/pulseaudio_profile
     install -d ${D}${sysconfdir}/udev/rules.d
