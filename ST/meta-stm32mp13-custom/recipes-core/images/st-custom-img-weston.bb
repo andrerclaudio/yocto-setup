@@ -7,11 +7,10 @@ IMAGE_FEATURES += "hwcodecs weston"
 # Include screen and touchscreen support in the machine features
 MACHINE_FEATURES += "screen touchscreen"
 
-# Install custom network configuration tool (custom bb file)
-IMAGE_INSTALL:append = " network-configuration"
+# Install custom network configuration tool (commented out for now)
+# IMAGE_INSTALL:append = " network-configuration"
 
 # Install additional useful tools in the image (commented out for now)
-# Uncomment the following line to install tools like procps, util-linux, nano, btop, fastfetch, and openssh
 # IMAGE_INSTALL:append = " procps util-linux nano btop fastfetch openssh"
 
 # Install timezone data package to configure timezones
