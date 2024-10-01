@@ -285,7 +285,7 @@ RM_OLD_IMAGE = "1"
 INHERIT += "rm_work"
 
 # Install some tools
-IMAGE_INSTALL:append = " tzdata nano htop git iperf3 libgpiod python3 python3-pip python3-gpiod"
+IMAGE_INSTALL:append = " tzdata nano git util-linux procps btop fastfetch iperf3 libgpiod python3 python3-pip python3-gpiod"
 # Set timezone area
 DEFAULT_TIMEZONE = "America/Sao_Paulo"
 # Setup eSDK

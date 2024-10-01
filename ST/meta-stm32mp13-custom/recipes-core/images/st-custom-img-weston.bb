@@ -11,7 +11,7 @@ MACHINE_FEATURES += "screen touchscreen"
 # IMAGE_INSTALL:append = " network-configuration"
 
 # Install additional useful tools in the image (commented out for now)
-# IMAGE_INSTALL:append = " procps util-linux nano btop fastfetch openssh"
+# IMAGE_INSTALL:append = " procps util-linux nano openssh"
 
 # Install timezone data package to configure timezones
 IMAGE_INSTALL:append = " tzdata"
