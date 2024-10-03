@@ -8,7 +8,6 @@ HOMEPAGE = "https://github.com/andrerclaudio/tock"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-
 # Inherit the cargo class for building the project.
 inherit cargo
 
@@ -22,57 +21,56 @@ SRC_URI = "git://github.com/andrerclaudio/tock;protocol=https;branch=master"
 # Specify the revision for the source code to download.
 SRCREV = "7d92d621559c5ac45f536ad987f6cd905ccc010b"
 S = "${WORKDIR}/git"
+CARGO_SRC_DIR = ""
 
-SRC_URI +=  " \
-            crate://crates.io/chrono/0.4.31 \
-            crate://crates.io/libc/0.2.149 \
-            crate://crates.io/clap/4.4.6 \
-            crate://crates.io/num-traits/0.2.17 \
-            crate://crates.io/android-tzdata/0.1.1 \
-            crate://crates.io/iana-time-zone/0.1.57 \
-            crate://crates.io/windows-targets/0.48.5 \
-            crate://crates.io/clap_builder/4.4.6 \
-            crate://crates.io/clap_derive/4.4.2 \
-            crate://crates.io/autocfg/1.1.0 \
-            crate://crates.io/core-foundation-sys/0.8.4 \
-            crate://crates.io/js-sys/0.3.64 \
-            crate://crates.io/wasm-bindgen/0.2.87 \
-            crate://crates.io/android_system_properties/0.1.5 \
-            crate://crates.io/iana-time-zone-haiku/0.1.2 \
-            crate://crates.io/windows/0.48.0 \
-            crate://crates.io/windows_aarch64_gnullvm/0.48.5 \
-            crate://crates.io/windows_aarch64_msvc/0.48.5 \
-            crate://crates.io/windows_i686_gnu/0.48.5 \
-            crate://crates.io/windows_i686_msvc/0.48.5 \
-            crate://crates.io/windows_x86_64_gnu/0.48.5 \
-            crate://crates.io/windows_x86_64_msvc/0.48.5 \
-            crate://crates.io/windows_x86_64_gnullvm/0.48.5 \
-            crate://crates.io/clap_builder/4.4.6 \
-            crate://crates.io/anstream/0.6.4 \
-            crate://crates.io/anstyle/1.0.4 \
-            crate://crates.io/clap_lex/0.5.1 \
-            crate://crates.io/heck/0.4.1 \
-            crate://crates.io/proc-macro2/1.0.69 \
-            crate://crates.io/quote/1.0.33 \
-            crate://crates.io/syn/2.0.38 \
-            crate://crates.io/cfg-if/1.0.0 \
-            crate://crates.io/wasm-bindgen-macro/0.2.87 \
-            crate://crates.io/cc/1.0.83 \
-            crate://crates.io/anstyle-parse/0.2.2 \
-            crate://crates.io/anstyle-query/1.0.0 \
-            crate://crates.io/anstyle-wincon/3.0.1 \
-            crate://crates.io/colorchoice/1.0.0 \
-            crate://crates.io/utf8parse/0.2.1 \
-            crate://crates.io/unicode-ident/1.0.12 \
-            crate://crates.io/wasm-bindgen-macro-support/0.2.87 \
-            crate://crates.io/windows-sys/0.48.0 \
-            crate://crates.io/wasm-bindgen-backend/0.2.87 \
-            crate://crates.io/wasm-bindgen-shared/0.2.87 \
-            crate://crates.io/bumpalo/3.14.0 \
-            crate://crates.io/log/0.4.20 \
-            crate://crates.io/once_cell/1.18.0 \
-            crate://crates.io/panic-abort/0.3.2 \
-            "
+SRC_URI += " \
+    crate://crates.io/android-tzdata/0.1.1 \
+    crate://crates.io/android_system_properties/0.1.5 \
+    crate://crates.io/anstream/0.6.4 \
+    crate://crates.io/anstyle-parse/0.2.2 \
+    crate://crates.io/anstyle-query/1.0.0 \
+    crate://crates.io/anstyle-wincon/3.0.1 \
+    crate://crates.io/anstyle/1.0.4 \
+    crate://crates.io/autocfg/1.1.0 \
+    crate://crates.io/bumpalo/3.14.0 \
+    crate://crates.io/cc/1.0.83 \
+    crate://crates.io/cfg-if/1.0.0 \
+    crate://crates.io/chrono/0.4.31 \
+    crate://crates.io/clap/4.4.6 \
+    crate://crates.io/clap_builder/4.4.6 \
+    crate://crates.io/clap_derive/4.4.2 \
+    crate://crates.io/clap_lex/0.5.1 \
+    crate://crates.io/colorchoice/1.0.0 \
+    crate://crates.io/core-foundation-sys/0.8.4 \
+    crate://crates.io/heck/0.4.1 \
+    crate://crates.io/iana-time-zone-haiku/0.1.2 \
+    crate://crates.io/iana-time-zone/0.1.57 \
+    crate://crates.io/js-sys/0.3.64 \
+    crate://crates.io/libc/0.2.149 \
+    crate://crates.io/log/0.4.20 \
+    crate://crates.io/num-traits/0.2.17 \
+    crate://crates.io/once_cell/1.18.0 \
+    crate://crates.io/proc-macro2/1.0.69 \
+    crate://crates.io/quote/1.0.33 \
+    crate://crates.io/syn/2.0.38 \
+    crate://crates.io/unicode-ident/1.0.12 \
+    crate://crates.io/utf8parse/0.2.1 \
+    crate://crates.io/wasm-bindgen-backend/0.2.87 \
+    crate://crates.io/wasm-bindgen-macro-support/0.2.87 \
+    crate://crates.io/wasm-bindgen-macro/0.2.87 \
+    crate://crates.io/wasm-bindgen-shared/0.2.87 \
+    crate://crates.io/wasm-bindgen/0.2.87 \
+    crate://crates.io/windows-sys/0.48.0 \
+    crate://crates.io/windows-targets/0.48.5 \
+    crate://crates.io/windows/0.48.0 \
+    crate://crates.io/windows_aarch64_gnullvm/0.48.5 \
+    crate://crates.io/windows_aarch64_msvc/0.48.5 \
+    crate://crates.io/windows_i686_gnu/0.48.5 \
+    crate://crates.io/windows_i686_msvc/0.48.5 \
+    crate://crates.io/windows_x86_64_gnu/0.48.5 \
+    crate://crates.io/windows_x86_64_gnullvm/0.48.5 \
+    crate://crates.io/windows_x86_64_msvc/0.48.5 \
+"
 
 # Specify the SHA sum to verify the downloaded source code.
 SRC_URI[chrono-0.4.31.sha256sum] = "7f2c685bad3eb3d45a01354cedb7d5faa66194d1d58ba6e267a8de788f79db38"
@@ -121,11 +119,8 @@ SRC_URI[wasm-bindgen-shared-0.2.87.sha256sum] = "ca6ad05a4870b2bf5fe995117d37284
 SRC_URI[bumpalo-3.14.0.sha256sum] = "7f30e7476521f6f8af1a1c4c0b8cc94f0bee37d91763d0ca2665f299b6cd8aec"
 SRC_URI[log-0.4.20.sha256sum] = "b5e6163cb8c49088c2c36f57875e58ccd8c87c7427f7fbd50ea6710b2f3f2e8f"
 SRC_URI[once_cell-1.18.0.sha256sum] = "dd8b5dd2ae5ed71462c540258bedcb51965123ad7e7ccf4b9a8cafaa4a63576d"
-SRC_URI[panic-abort-0.3.2.sha256sum] = "4e20e6499bbbc412f280b04a42346b356c6fa0753d5fd22b7bd752ff34c778ee"
-
-CARGO_SRC_DIR = ""
 
 do_install(){
     install -d ${D}${bindir}
-    install -m 0755 ${B}/tock ${D}${bindir}
+    install -m 0755 ${B}/tock ${D}${bindir}/
 }
