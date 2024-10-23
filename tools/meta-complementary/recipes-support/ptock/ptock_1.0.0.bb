@@ -1,5 +1,7 @@
-DESCRIPTION = "A digital clock for the terminal, made in Python, inspired by tty-clock."
-SUMMARY =   "It displays the time in the terminal, with several options, check -h flag to see al the options."
+DESCRIPTION = "A digital clock for the terminal, inspired by tty-clock and tock."
+SUMMARY     = "The main difference with this version is that it is written in Python, \
+                and my goal was primarily to learn as much as possible about the language \
+                itself."
 SECTION = "console/utils"
 
 HOMEPAGE = "https://github.com/andrerclaudio/pTock"
@@ -12,7 +14,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 # Specify the source URI and its checksum for validation.
 SRC_URI = "git://github.com/andrerclaudio/pTock;protocol=https;branch=main"
 
-SRCREV = "8ef80989583ac9849cd0be36b7140a1a276db872"
+SRCREV = "d6cfa9e85cf0f41897e7c45051661ff8e9ffe806"
 S = "${WORKDIR}/git"
 
 # Define runtime dependencies for this package.
