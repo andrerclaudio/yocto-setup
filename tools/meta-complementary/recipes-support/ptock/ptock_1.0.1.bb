@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 # Specify the source URI and its checksum for validation.
 SRC_URI = "git://github.com/andrerclaudio/pTock;protocol=https;branch=main"
 
-SRCREV = "d6cfa9e85cf0f41897e7c45051661ff8e9ffe806"
+SRCREV = "f197ed875a783f2af35793b29e38152eb6c3ac77"
 S = "${WORKDIR}/git"
 
 # Define runtime dependencies for this package.
