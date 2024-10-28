@@ -11,10 +11,10 @@ BUGTRACKER = "https://github.com/andrerclaudio/python3-ptock/issues"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-SRC_URI[md5sum] = "53ad6c28d2deffb2800241552090040f"
-SRC_URI[sha256sum] = "189cb39f130bf4dc9f77baf054016b5547077bc9c183c24728367b15ba11d3e3"
+SRC_URI[md5sum] = "924efc793fa48799dec277c1965a3c2a"
+SRC_URI[sha256sum] = "68e0c3b4e1ec638cdd74099b3cce0de603b7d8f8932968cd75ace0a4472eefb8"
 
-# The correct module name is "python3-ptock", but it seems that the "-" well
+# The correct module name is "python3-ptock", but it seems the "-" is not well
 # interpreted by the link or something.
 PYPI_PACKAGE = "python3_ptock"
 
