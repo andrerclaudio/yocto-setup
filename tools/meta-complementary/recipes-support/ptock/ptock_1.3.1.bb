@@ -11,8 +11,8 @@ BUGTRACKER = "https://github.com/andrerclaudio/python3-ptock/issues"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-SRC_URI[md5sum] = "27151ee7e16c5974bcbbbf85497c577f"
-SRC_URI[sha256sum] = "c9a40da9c487d6586bf39a520c3b20ac1fdf23d01442a7e0ad2efa5bedc58472"
+SRC_URI[md5sum] = "554862b8d4e6d9a58f580ce3a72fc40c"
+SRC_URI[sha256sum] = "3914b3b417f5366abc6f4ba2bdf7cf23b1b8bb79d6f0e3da95a18b4ed70ec0bd"
 
 # The correct module name is "python3-ptock", but it seems the "-" is not well
 # interpreted by the link or something.
