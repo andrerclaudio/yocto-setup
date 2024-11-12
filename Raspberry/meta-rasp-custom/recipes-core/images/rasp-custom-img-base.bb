@@ -8,6 +8,8 @@ COMPATIBLE_MACHINE = "^rpi$"
 
 IMAGE_INSTALL:append    = " nano \
                             htop \
+                            btop \
+                            fastfetch \
                             util-linux \
                             procps \
                             openssh \
@@ -31,6 +33,3 @@ IMAGE_FEATURES:append = " debug-tweaks"
 
 # Generate the images format as below
 IMAGE_FSTYPES = "tar.bz2 wic.bz2"
-
-# Inherit core image features and functionality
-# inherit core-image
