@@ -7,26 +7,14 @@ include recipes-core/images/core-image-base.bb
 COMPATIBLE_MACHINE = "^rpi$"
 
 IMAGE_INSTALL:append    = " nano \
-                            htop \
                             btop \
                             fastfetch \
                             util-linux \
                             procps \
                             openssh \
                             linux-firmware-bcm43430 \
-                            raspi-gpio \
-                            connman \
-                            connman-client \
-                            wireless-regdb-static \   
-                            bluez5 \
-                            i2c-tools \
-                            python3-smbus \
-                            bridge-utils \
-                            hostapd \
-                            dhcpcd \
-                            dnsmasq \
-                            iptables \
-                            wpa-supplicant \
+                            network-configuration \
+                            add-jig-script \
                         "
 
 IMAGE_FEATURES:append = " debug-tweaks"

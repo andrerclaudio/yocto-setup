@@ -1,0 +1,14 @@
+[Unit]
+Description=Jig script started as a service
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=python3 /usr/share/jig-script/main.py
+ExecStop=/bin/kill -INT $MAINPID
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
