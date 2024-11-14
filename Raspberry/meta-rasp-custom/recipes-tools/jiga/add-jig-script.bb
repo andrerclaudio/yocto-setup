@@ -21,7 +21,7 @@ RDEPENDS:${PN}    = "\
                         python3 \
                         python3-modules \
                         python3-threading \
-                        raspi-gpio \
+                        rpi-gpio \
                         python3-pyserial \
                         python3-evdev \
                         python3-requests \
