@@ -13,7 +13,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
 # Enable automatic starting of the systemd service
 SYSTEMD_AUTO_ENABLE = "enable"
 # Append the systemd service for wpa_supplicant to start automatically and bring the wlan up at boot time
-SYSTEMD_SERVICE:${PN}:append = " wpa_supplicant-nl80211@wlan0.service systemd-networkd.service"
+SYSTEMD_SERVICE:${PN}:append = " wpa_supplicant-nl80211@wlan0.service systemd-networkd.service systemd-resolved.service"
 
 # Installation task
 do_install:append () {
