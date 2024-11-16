@@ -13,7 +13,6 @@ IMAGE_INSTALL:append    = " nano \
                             procps \
                             openssh \
                             linux-firmware-bcm43430 \
-                            network-configuration \
                             add-jig-script \
                         "
 

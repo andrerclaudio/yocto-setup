@@ -12,7 +12,7 @@ SRC_URI =   " \
 # Inherit features_check to check required features
 inherit features_check
 # Specify that the image requires systemd service manager
-REQUIRED_DISTRO_FEATURES = "systemd"
+REQUIRED_DISTRO_FEATURES = "systemd wifi"
 # Enable automatic starting of the systemd service
 SYSTEMD_AUTO_ENABLE = "enable"
 # Append the systemd service for wpa_supplicant to start automatically and Bring Up the mlan0 hardware
