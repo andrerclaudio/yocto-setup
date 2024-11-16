@@ -7,9 +7,6 @@ IMAGE_FEATURES += "hwcodecs weston"
 # Include screen and touchscreen support in the machine features
 MACHINE_FEATURES += "screen touchscreen"
 
-# Install custom network configuration tool (commented out for now)
-# IMAGE_INSTALL:append = " network-configuration"
-
 # Install additional useful tools in the image (commented out for now)
 # IMAGE_INSTALL:append = " procps util-linux nano openssh"
 
