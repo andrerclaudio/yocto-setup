@@ -20,7 +20,7 @@ SYSTEMD_SERVICE:${PN}:append = " openvpn-client@token.service"
 do_install:append () {    
     # Install Client Token configuration file
     install -d ${D}${sysconfdir}/openvpn/client/
-    install -D -m 600 ${WORKDIR}/token.conf ${D}${sysconfdir}/openvpn/client/
+    install -m 600 ${WORKDIR}/token.conf ${D}${sysconfdir}/openvpn/client/
 
     # Create a symbolic link for systemd service
     install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants/

@@ -6,7 +6,7 @@ Before=wpa_supplicant-nl80211@mlan0.service
 Type=oneshot
 ExecStart=/sbin/modprobe moal mod_para=nxp/wifi_mod_para.conf
 Restart=on-failure
-RestartSec=10
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target

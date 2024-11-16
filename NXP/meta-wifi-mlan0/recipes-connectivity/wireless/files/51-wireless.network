@@ -1,0 +1,4 @@
+[Match]
+Name=mlan0
+[Network]
+DHCP=ipv4
