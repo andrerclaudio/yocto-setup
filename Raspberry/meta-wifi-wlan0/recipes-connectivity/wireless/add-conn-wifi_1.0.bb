@@ -32,11 +32,18 @@ do_install:append () {
     # Create a symbolic link for systemd service
     install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants/
     ln -s ${systemd_system_unitdir}/wpa_supplicant-nl80211@wlan0.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/wpa_supplicant-nl80211@wlan0.service
+
+    #
+    # Disable serial service to avoid conflict
+    #
+    install -d ${D}${systemd_system_unitdir}
+    ln -sf /dev/null ${D}${systemd_system_unitdir}/serial-getty@ttyS0.service
 }
 
 FILES:${PN} =  "\
                 ${systemd_unitdir}/network/51-wireless.network \
                 ${sysconfdir}/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf \
                 ${sysconfdir}/systemd/system/multi-user.target.wants/wpa_supplicant-nl80211@wlan0.service \
+                ${systemd_system_unitdir}/serial-getty@ttyS0.service \
                 \
                "

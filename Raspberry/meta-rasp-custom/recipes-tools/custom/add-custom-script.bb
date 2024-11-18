@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 # Specify source URIs for configuration files
-SRC_URI = " file://jig-script.service \
+SRC_URI = " file://custom-script.service \
             file://script/ \
         "
 
@@ -14,8 +14,8 @@ inherit features_check
 REQUIRED_DISTRO_FEATURES = "systemd"
 # Enable automatic starting of the systemd service
 SYSTEMD_AUTO_ENABLE = "enable"
-# Append the systemd service for jig-script to start automatically
-SYSTEMD_SERVICE:${PN}:append = " jig-script.service"
+# Append the systemd service for custom-script to start automatically
+SYSTEMD_SERVICE:${PN}:append = " custom-script.service"
 # Script dependencies
 RDEPENDS:${PN}    = "\
                         python3 \
@@ -30,29 +30,23 @@ RDEPENDS:${PN}    = "\
 # Installation task
 do_install:append () {    
     # Install script files 
-    install -d -m 755 ${D}${datadir}/jig-script        
-    install -p -m 644 ${WORKDIR}/script/* ${D}${datadir}/jig-script/
-    chown -R root:root ${D}${datadir}/jig-script
+    install -d -m 755 ${D}${datadir}/custom-script        
+    install -p -m 644 ${WORKDIR}/script/* ${D}${datadir}/custom-script/
+    chown -R root:root ${D}${datadir}/custom-script
 
     # Install the service file to the systemd folders
     install -d ${D}${systemd_system_unitdir}
-    install -p -m 0644 ${WORKDIR}/jig-script.service ${D}${systemd_system_unitdir}/jig-script.service
+    install -p -m 0644 ${WORKDIR}/custom-script.service ${D}${systemd_system_unitdir}/custom-script.service
 
     # Create a symbolic link for systemd service
     install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants/
-    ln -s ${systemd_system_unitdir}/jig-script.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/jig-script.service
-
-    #
-    # Disable serial service to avoid conflict with Serial port and the script We are going to run
-    #
-    ln -sf /dev/null ${D}${systemd_system_unitdir}/serial-getty@ttyS0.service
+    ln -s ${systemd_system_unitdir}/custom-script.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/custom-script.service
 }
 
 FILES:${PN} =  "\
-                ${datadir}/jig-script/* \
-                ${systemd_system_unitdir}/jig-script.service \
-                ${sysconfdir}/systemd/system/multi-user.target.wants/jig-script.service \
-                ${systemd_system_unitdir}/serial-getty@ttyS0.service \
+                ${datadir}/custom-script/* \
+                ${systemd_system_unitdir}/custom-script.service \
+                ${sysconfdir}/systemd/system/multi-user.target.wants/custom-script.service \                
                 \
                "
 

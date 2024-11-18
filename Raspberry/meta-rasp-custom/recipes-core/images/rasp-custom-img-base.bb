@@ -13,7 +13,7 @@ IMAGE_INSTALL:append    = " nano \
                             procps \
                             openssh \
                             linux-firmware-bcm43430 \
-                            add-jig-script \
+                            add-custom-script \
                         "
 
 IMAGE_FEATURES:append = " debug-tweaks"
