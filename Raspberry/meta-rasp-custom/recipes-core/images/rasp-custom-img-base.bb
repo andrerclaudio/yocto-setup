@@ -8,7 +8,6 @@ COMPATIBLE_MACHINE = "^rpi$"
 
 IMAGE_INSTALL:append    = " nano \
                             btop \
-                            fastfetch \
                             util-linux \
                             procps \
                             openssh \

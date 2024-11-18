@@ -17,15 +17,15 @@ SYSTEMD_AUTO_ENABLE = "enable"
 # Append the systemd service for custom-script to start automatically
 SYSTEMD_SERVICE:${PN}:append = " custom-script.service"
 # Script dependencies
-RDEPENDS:${PN}    = "\
-                        python3 \
-                        python3-modules \
-                        python3-threading \
-                        rpi-gpio \
-                        python3-pyserial \
-                        python3-evdev \
-                        python3-requests \
-                    "
+RDEPENDS:${PN} = "\
+                    python3 (= 3.12.6) \
+                    python3-modules (= 3.12.6) \
+                    python3-threading (= 3.12.6) \
+                    rpi-gpio (= 0.7.1) \
+                    python3-pyserial (= 3.5) \
+                    python3-evdev (= 1.6.1) \
+                    python3-requests (= 2.31.0) \
+                "
 
 # Installation task
 do_install:append () {    
