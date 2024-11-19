@@ -6,8 +6,7 @@ Type=simple
 User=root
 Group=root
 ExecStart=python3 /usr/share/custom-script/main.py
-ExecStop=/bin/kill -INT $MAINPID
-Restart=always
+Restart=on-failure
 RestartSec=10
 
 [Install]

@@ -23,7 +23,6 @@ RDEPENDS:${PN} = "\
                     python3-threading (= 3.12.6) \
                     rpi-gpio (= 0.7.1) \
                     python3-pyserial (= 3.5) \
-                    python3-evdev (= 1.6.1) \
                     python3-requests (= 2.31.0) \
                 "
 
