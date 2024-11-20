@@ -5,7 +5,7 @@ start)
    systemctl --user start pipewire
    systemctl --user start pipewire-pulse
    systemctl --user start wireplumber.service
-   /bin/sleep 1
+   /bin/sleep 5
    ;;
 stop)
    systemctl --user stop weston.service weston.socket

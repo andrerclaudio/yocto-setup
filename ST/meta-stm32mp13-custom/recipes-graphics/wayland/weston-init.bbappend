@@ -34,7 +34,6 @@ WESTON_HDMI_MODE ??= "1280x720"
 PACKAGE_ARCH := "${MACHINE_ARCH}"
 
 FILES:${PN} += " ${datadir}/weston \
-         ${datadir}/weston-start-at-startup \
          ${sysconfdir}/etc/default \
          ${sbindir}/ \
          ${sysconfdir}/etc/default \
@@ -42,14 +41,18 @@ FILES:${PN} += " ${datadir}/weston \
          ${sysconfdir}/xdg/weston/weston.ini \
          /home/root \
          ${systemd_user_unitdir} \
+         ${systemd_system_unitdir} \
          "
 
 CONFFILES:${PN} += "${sysconfdir}/xdg/weston/weston.ini"
 
-do_install:append() {
+do_install() {
     install -d ${D}${sysconfdir}/xdg/weston/
     install -d ${D}${datadir}/weston/backgrounds
-    install -d ${D}${datadir}/weston-start-at-startup/
+
+    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}" ]; then
+        install -D -p -m0644 ${WORKDIR}/weston-autologin ${D}${sysconfdir}/pam.d/weston-autologin
+    fi
 
     # backgrounds & weston.ini
     install -m 0644 ${WORKDIR}/weston.ini ${D}${sysconfdir}/xdg/weston
@@ -60,17 +63,13 @@ do_install:append() {
 
     install -d ${D}${systemd_system_unitdir} ${D}${sbindir}
 
-    install -d ${D}/lib/systemd/system/
-    if [ -e ${D}/lib/systemd/system/weston.service ]; then
-        rm ${D}/lib/systemd/system/weston.service ${D}/lib/systemd/system/weston.socket
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -D -p -m0644 ${WORKDIR}/weston-graphical-session.service ${D}${systemd_system_unitdir}/weston-graphical-session.service
         sed -i -e s:/etc:${sysconfdir}:g \
             -e s:/usr/bin:${bindir}:g \
             -e s:/var:${localstatedir}:g \
             ${D}${systemd_unitdir}/system/weston-graphical-session.service
-        install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants/
         install -D -m 0755 ${WORKDIR}/systemd-graphical-weston-session.sh ${D}${bindir}/systemd-graphical-weston-session.sh
-        #ln -s /lib/systemd/system/weston-launch.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/display-manager.service
         install -D -p -m0644 ${WORKDIR}/weston-checkgpu.service ${D}${systemd_system_unitdir}/weston-checkgpu.service
 
         install -d ${D}${systemd_user_unitdir}

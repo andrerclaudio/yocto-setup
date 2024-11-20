@@ -8,7 +8,7 @@ IMAGE_FEATURES += "hwcodecs weston"
 MACHINE_FEATURES += "screen touchscreen"
 
 # Install additional useful tools in the image (commented out for now)
-# IMAGE_INSTALL:append = " procps util-linux nano openssh"
+IMAGE_INSTALL:append = " procps util-linux nano openssh btop fastfetch ptock openvpn-at-boot"
 
 # Install timezone data package to configure timezones
 IMAGE_INSTALL:append = " tzdata"
@@ -16,7 +16,7 @@ IMAGE_INSTALL:append = " tzdata"
 DEFAULT_TIMEZONE = "America/Argentina/Buenos_Aires"
 
 # Mask the Weston-init bbappend to prevent conflicts with custom configurations
-ST_ECOSYSTEM_GRAPHICAL_PATH = "STM32MPU-Ecosystem-v5.1.0/Distribution-Package/layers/meta-st/meta-st-openstlinux/recipes-graphics"
+ST_ECOSYSTEM_GRAPHICAL_PATH = "STM32MPU-Ecosystem-v6.6.0/Distribution-Package/layers/meta-st/meta-st-openstlinux/recipes-graphics"
 BBMASK += "${ST_ECOSYSTEM_GRAPHICAL_PATH}/wayland/weston-init.bbappend"
 
 # Exclude the .tar.xz file format from the generated filesystem images to reduce build size
