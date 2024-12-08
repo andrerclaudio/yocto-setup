@@ -1,0 +1,11 @@
+[Unit]
+Description=Set LED Configuration to reflect Wlan0 Status
+After=wpa_supplicant-nl80211@wlan0.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/set-wifi-statusled.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

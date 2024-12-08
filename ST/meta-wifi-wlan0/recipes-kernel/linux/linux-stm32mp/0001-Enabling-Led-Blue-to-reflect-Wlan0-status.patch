@@ -1,0 +1,26 @@
+From 1504e0db71c0de2c2eda20f013f735d0afffbac0 Mon Sep 17 00:00:00 2001
+From: Andre Ribeiro <andre.ribeiro.srs@gmail.com>
+Date: Sat, 7 Dec 2024 21:31:11 -0300
+Subject: [PATCH] Enabling Led Blue to reflect Wlan0 status.
+
+---
+ arch/arm/boot/dts/st/stm32mp135f-dk.dts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/st/stm32mp135f-dk.dts b/arch/arm/boot/dts/st/stm32mp135f-dk.dts
+index d3b47650d..657789796 100644
+--- a/arch/arm/boot/dts/st/stm32mp135f-dk.dts
++++ b/arch/arm/boot/dts/st/stm32mp135f-dk.dts
+@@ -90,10 +90,10 @@ leds {
+ 		compatible = "gpio-leds";
+ 
+ 		led-blue {
+-			function = LED_FUNCTION_HEARTBEAT;
++			function = LED_FUNCTION_STATUS;
+ 			color = <LED_COLOR_ID_BLUE>;
+ 			gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
+-			linux,default-trigger = "heartbeat";
++			linux,default-trigger = "netdev";
+ 			default-state = "off";
+ 		};
+ 	};
