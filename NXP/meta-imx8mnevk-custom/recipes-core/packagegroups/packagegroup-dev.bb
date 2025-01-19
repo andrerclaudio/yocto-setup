@@ -9,6 +9,8 @@ RDEPENDS:${PN} += " \
     \
     git \
     libgpiod \
+    libgpiod-tools \
+    libgpiod-dev \
     python3 \
     python3-pip \
     python3-gpiod \

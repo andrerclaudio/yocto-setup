@@ -8,11 +8,11 @@ CORE_IMAGE_EXTRA_INSTALL:append     = " \
                                         \
                                     "
 
-# CORE_IMAGE_EXTRA_INSTALL:append     = " \
-#                                         packagegroup-eval \
-#                                         packagegroup-dev \
-#                                         \
-#                                     "
+CORE_IMAGE_EXTRA_INSTALL:append     = " \
+                                        packagegroup-eval \
+                                        packagegroup-dev \
+                                        \
+                                    "
 
 # CORE_IMAGE_EXTRA_INSTALL:append     = " \
 #                                         packagegroup-imx-tools-audio \
