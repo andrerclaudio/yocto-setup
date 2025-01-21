@@ -13,6 +13,7 @@ import signal
 import threading
 import time
 from functools import partial
+from typing import Dict
 
 import gpiod
 from gpiod.line_settings import Direction, Value
@@ -44,11 +45,22 @@ class AppControlFlags:
     Attributes:
         keep_running (bool): Indicates if the application should continue running.
         wait (bool): Synchronization flag for controlling thread operations.
+        __WORK_COUNTER (Dict[str, int]): Tracks counters for different operations by name.
+
+    Methods:
+        get_counter(name: str) -> int: Retrieves the counter value for a given name.
+        increment_counter(name: str) -> None: Increments the counter value for a given name.
+        add_counter(name: str) -> None: Initializes a counter for a given name.
+        min_counter() -> str: Returns the name of the operation with the minimum counter value.
     """
 
     def __init__(self) -> None:
+        """
+        Initializes the control flags and counter dictionary.
+        """
         self.__KEEP_RUNNING: bool = True
-        self.__WAIT: bool = False
+        self.__WAIT: bool = True
+        self.__WORK_COUNTER: Dict[str, int] = {}
 
     @property
     def keep_running(self) -> bool:
@@ -70,6 +82,45 @@ class AppControlFlags:
         """Set the wait flag."""
         self.__WAIT = value
 
+    def add_counter(self, name: str) -> None:
+        """
+        Initializes a counter for a given operation name.
+
+        Args:
+            name (str): Name of the operation.
+        """
+        self.__WORK_COUNTER[name] = 0
+
+    def get_counter(self, name: str) -> int:
+        """
+        Retrieves the counter value for a given operation name.
+
+        Args:
+            name (str): Name of the operation.
+
+        Returns:
+            int: Counter value for the operation.
+        """
+        return self.__WORK_COUNTER[name]
+
+    def increment_counter(self, name: str) -> None:
+        """
+        Increments the counter value for a given operation name.
+
+        Args:
+            name (str): Name of the operation.
+        """
+        self.__WORK_COUNTER[name] += 1
+
+    def min_counter(self) -> str:
+        """
+        Returns the name of the operation with the minimum counter value.
+
+        Returns:
+            str: Name of the operation with the minimum counter.
+        """
+        return min(self.__WORK_COUNTER, key=self.__WORK_COUNTER.get)
+
 
 class GpioOutput(threading.Thread):
     """
@@ -85,7 +136,9 @@ class GpioOutput(threading.Thread):
         gpio_controller (gpiod.LineRequest): GPIO controller for managing the specified line.
         output_number (int): GPIO line number assigned to this thread.
         led_state (Value): Current state of the LED (ON or OFF).
-        work_counter (int): Tracks the number of times the LED state has toggled.
+
+    Methods:
+        run() -> None: Main thread loop for toggling the GPIO output.
     """
 
     def __init__(
@@ -107,15 +160,17 @@ class GpioOutput(threading.Thread):
             output_number (int): GPIO line number.
         """
         threading.Thread.__init__(self)
-        self.name = f"[Output-{output_number}]"
+        self.name = f"OUT-{output_number}"  # Thread name based on output number
 
-        self.control: AppControlFlags = control
-        self.lock: threading.Lock = lock
-        self.condition: threading.Condition = condition
-        self.led_state: Value = LED_OFF
-        self.output: gpiod.LineRequest = gpio_controller
-        self.output_number: int = output_number
-        self.work_counter: int = 1
+        self._control: AppControlFlags = control
+        self._lock: threading.Lock = lock
+        self._condition: threading.Condition = condition
+        self._led_state: Value = LED_OFF  # Initial LED state is OFF
+        self._output: gpiod.LineRequest = gpio_controller
+        self._output_number: int = output_number
+
+        # Initialize counter for this thread
+        self._control.add_counter(name=self.name)
         self.start()  # Automatically start the thread
 
     def __app_is_running(self) -> bool:
@@ -125,32 +180,50 @@ class GpioOutput(threading.Thread):
         Returns:
             bool: True if the application should continue running, False otherwise.
         """
-        with self.lock:
-            return self.control.keep_running
+        with self._lock:
+            return self._control.keep_running
 
     def __waiting(self) -> None:
         """
         Pause the thread until it is notified to proceed.
 
-        The thread waits on a condition until the wait flag is cleared.
+        The thread waits on a condition until it is its turn to proceed based on priority.
         """
-        with self.condition:
-            logger.debug(f"[{self.output_number}] Waiting ...")
-            while self.control.wait:
-                self.condition.wait()
-            self.control.wait = True
+        with self._condition:
+            while True:
+                # Check if the thread has the priority to proceed
+                got_priority = self.name == self._control.min_counter()
+
+                if not self._control.wait and got_priority:
+                    # If the global wait flag is cleared and this thread has priority, exit loop
+                    break
+
+                if not got_priority:
+                    logger.debug(f"[{self.name}] Waiting for priority...")
+                else:
+                    logger.debug(
+                        f"[{self.name}] Waiting for global wait flag to be cleared..."
+                    )
+
+                # Wait for a notification
+                self._condition.wait()
+
+            # Once the thread has priority, update the state
+            logger.debug(f"[{self.name}] Good to go!")
+            self._control.increment_counter(name=self.name)
+            self._control.wait = True  # Re-enable the global wait flag
 
     def __release_wait_flag(self) -> None:
         """
         Release the wait flag and notify all waiting threads.
         """
-        with self.condition:
-            logger.debug(f"[{self.output_number}] Releasing wait flag...")
-            self.control.wait = False
-            self.condition.notify_all()
-        logger.debug(f"[{self.output_number}] Toggled {self.work_counter} times.")
-        self.work_counter += 1
-        time.sleep(0.001)
+        with self._condition:
+            logger.debug(f"[{self.name}] Releasing wait flag...")
+            self._control.wait = False
+            self._condition.notify_all()
+        logger.debug(
+            f"[{self.name}] Toggled {self._control.get_counter(self.name)} times."
+        )
 
     def run(self) -> None:
         """
@@ -159,25 +232,27 @@ class GpioOutput(threading.Thread):
         Continuously toggles the LED state between ON and OFF at regular intervals
         until the thread is stopped.
         """
-        logger.info(f"Starting GPIO thread for line {self.output_number}.")
+        logger.info(f"Starting GPIO thread for line {self.name}.")
 
         try:
             while self.__app_is_running():
+                # Wait for the thread's turn to proceed
                 self.__waiting()
 
                 # Toggle LED state
-                self.led_state = LED_ON if self.led_state == LED_OFF else LED_OFF
-                self.output.set_value(line=self.output_number, value=self.led_state)
-                logger.debug(
-                    f"LED [{self.output_number}] State changed to: {self.led_state}"
-                )
+                self._led_state = LED_ON if self._led_state == LED_OFF else LED_OFF
+                self._output.set_value(line=self._output_number, value=self._led_state)
+                logger.debug(f"LED [{self.name}] State changed to: {self._led_state}")
+
+                # Wait for the blink delay
                 time.sleep(OUTPUT_BLINK_DELAY)
 
+                # Release the wait flag and notify other threads
                 self.__release_wait_flag()
 
             # Turn off LED before exiting
-            self.output.set_value(line=self.output_number, value=LED_OFF)
-            logger.info(f"GPIO thread for line {self.output_number} finished.")
+            self._output.set_value(line=self._output_number, value=LED_OFF)
+            logger.info(f"GPIO thread for line {self.name} finished.")
 
         except Exception as e:
             logger.error(f"Error in thread: {e}", exc_info=True)
@@ -203,10 +278,11 @@ def handle_sigint(
 if __name__ == "__main__":
     # Register the signal handler for Ctrl+C (SIGINT)
     logger.info("Starting the application!")
+
     lines: gpiod.LineRequest | None = None
 
     try:
-        # Request LINES config and others relevant values
+        # Request GPIO lines with initial configuration
         lines = gpiod.request_lines(
             PATH,
             consumer=CONSUMER_NAME,
@@ -233,6 +309,7 @@ if __name__ == "__main__":
         sigint_handler = partial(handle_sigint, app_control_flags, lock_flag)
         signal.signal(signal.SIGINT, sigint_handler)
 
+        # Create threads for each GPIO output
         GpioOutput(
             control=app_control_flags,
             lock=lock_flag,
@@ -249,10 +326,18 @@ if __name__ == "__main__":
             output_number=LED_2,
         )
 
+        # Signalize the threads after they are all ready to start working
+        time.sleep(1)
+        with condition_flag:
+            app_control_flags.wait = False
+            condition_flag.notify_all()
+
+        # Keep the main thread running until the application is stopped
         while app_control_flags.keep_running:
             pass
 
-        time.sleep(OUTPUT_BLINK_DELAY * 3)  # Wait a while to ensure the threads exited
+        # Wait a bit to ensure threads exit cleanly
+        time.sleep(OUTPUT_BLINK_DELAY * 3)
         logger.info("Releasing resources ...")
 
     except Exception as e:
